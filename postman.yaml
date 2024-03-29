@@ -17,5 +17,5 @@ steps:
 - task: PublishTestResults
   displayName: 'Publish HTML Report'
   inputs:
-    PathtoPublish: '/reports'
+    targetPath: '/reports'
     ArtifactName: 'Report'
