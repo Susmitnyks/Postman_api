@@ -14,7 +14,7 @@ steps:
   displayName: 'Run API Test'
   continueOnError: true
 
-- task: PublishTestResults
+- task: PublishPipelineArtifact@1
   displayName: 'Publish HTML Report'
   inputs:
     targetPath: '/reports'
