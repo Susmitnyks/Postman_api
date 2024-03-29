@@ -1,0 +1,29 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm install -g newman newman-reporter-htmlextra
+    displayName: 'Install Newman and Newman HTML Extra'
+
+  - checkout: self
+    persistCredentials: true
+
+  - script: |
+      newman run Test_fire.postman_collection.json -r htmlextra
+    displayName: 'Run Postman Collection'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'newman'
+      artifact: 'newman-results'
+      publishLocation: 'pipeline'
+    displayName: 'Publish Newman HTML Report'
