@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "06d498f6-0270-4286-b754-1460ff1b90e2",
+		"name": "Test_fire",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\": \"jsmith\", \"password\": \"demo1234\"}"
+				},
+				"url": {
+					"raw": "https://demo.testfire.net/api/login",
+					"protocol": "https",
+					"host": [
+						"demo",
+						"testfire",
+						"net"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "YW5OdGFYUm86WkdWdGJ6RXlNelE9OmchPxI/KQ=="
+					}
+				],
+				"url": {
+					"raw": "https://demo.testfire.net/api/login",
+					"protocol": "https",
+					"host": [
+						"demo",
+						"testfire",
+						"net"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
