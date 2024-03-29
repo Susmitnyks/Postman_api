@@ -46,7 +46,7 @@ steps:
       $emailBody = "Please find the attached pytest api execution report."
 
       # Path to the HTML report
-      $attachmentPath = "$(System.DefaultWorkingDirectory)/reports/report.html"
+      $attachmentPath = "$(Build.ArtifactStagingDirectory)/reports/report.html"
 
       # Send email with attached HTML report using TLS/SSL
       $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
