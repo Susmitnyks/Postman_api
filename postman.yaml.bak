@@ -34,7 +34,7 @@ steps:
       $todayDate = Get-Date -Format "dd-MM-yyyy"
 
       # Set the email subject
-      $subject = "Daily Production API Automation report for $todayDate"
+      $subject = "Daily Report of Production API Automation for $todayDate"
 
       # SMTP credentials
       $username = "susmit.s.surwade@gmail.com"
