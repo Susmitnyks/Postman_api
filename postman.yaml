@@ -12,6 +12,7 @@ steps:
 
   - script: |
       npm install -g newman newman-reporter-htmlextra
+      mkdir $(System.DefaultWorkingDirectory)\newman
       newman run Test_fire.postman_collection.json -r htmlextra --reporter-htmlextra-export $(System.DefaultWorkingDirectory)\newman\index.html
     displayName: 'Run Postman Collection'
 
