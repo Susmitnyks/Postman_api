@@ -8,14 +8,14 @@ steps:
 - script: |
     npm install -g newman
     npm install -g newman-reporter-html-extra
-    displayName: 'Install Newman and Html reporter'
+  displayName: 'Install Newman and Html reporter'
 
 - script: newman run Test_fire.postman_collection.json --reporters cli,htmlextra
-    displayName: 'Run API Test'
-    continueOnError: true
+  displayName: 'Run API Test'
+  continueOnError: true
 
 - task: PublishTestResults
-    displayName: 'Publish HTML Report'
-    inputs:
-        PathtoPublish: '/reports'
-        ArtifactName: 'Report'
+  displayName: 'Publish HTML Report'
+  inputs:
+    PathtoPublish: '/reports'
+    ArtifactName: 'Report'
