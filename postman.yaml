@@ -6,17 +6,18 @@ pool:
 
 steps:
 - script: |
-    npm install -g newman
-    npm install -g newman-reporter-htmlextra
+    npm install -g newman newman-reporter-htmlextra
   displayName: 'Install Newman and Html reporter'
 
 - script: newman run Test_fire.postman_collection.json -r htmlextra
   displayName: 'Run API Test'
   continueOnError: true
 
+- script: mkdir $(Build.ArtifactStagingDirectory)\reports
+  displayName: 'Create Reports Directory'
+
 - task: PublishPipelineArtifact@1
   displayName: 'Publish HTML Report'
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)/reports'
     ArtifactName: 'Report'
-
