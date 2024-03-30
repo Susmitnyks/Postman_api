@@ -6,92 +6,19 @@
 	},
 	"item": [
 		{
-			"name": "Login API",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{ \"username\": \"jsmith\", \"password\": \"demo1234\"}"
-				},
-				"url": {
-					"raw": "https://demo.testfire.net/api/login",
-					"protocol": "https",
-					"host": [
-						"demo",
-						"testfire",
-						"net"
-					],
-					"path": [
-						"api",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Check token",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "YW5OdGFYUm86WkdWdGJ6RXlNelE9OmchPxI/KQ=="
-					}
-				],
-				"url": {
-					"raw": "https://demo.testfire.net/api/login",
-					"protocol": "https",
-					"host": [
-						"demo",
-						"testfire",
-						"net"
-					],
-					"path": [
-						"api",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Refresh Token",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
+							"pm.test(\"Verify Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"access_token\", jsonData.access_token);\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -196,6 +123,145 @@
 						{
 							"key": "key",
 							"value": "AIzaSyCz1XmsF38COosTR5crCZh8p8ZsAVCaNgM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listing API_total files count",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Calculate yesterday's date\r",
+							"var yesterday = new Date();\r",
+							"yesterday.setDate(yesterday.getDate() - 2);\r",
+							"var yesterdayFormatted = yesterday.toLocaleDateString(\"en-GB\"); // Format as \"dd/mm/yyyy\"\r",
+							"\r",
+							"// Set the environment variable\r",
+							"pm.environment.set(\"yesterday\", yesterdayFormatted);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"// Extract page_no\r",
+							"var page = jsonData.meta.page;\r",
+							"// Set page_no as a Postman variable\r",
+							"pm.environment.set(\"page\", page);\r",
+							"\r",
+							"// Check if page_no is equal to 1\r",
+							"pm.test(\"Verify API reponse content are OK\", function () {\r",
+							"    pm.expect(page).to.equal(1);\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"Verify Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Origin",
+						"value": "https://comms-coach.englishscore.com"
+					},
+					{
+						"key": "Referer",
+						"value": "https://comms-coach.englishscore.com/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
+				"url": {
+					"raw": "https://cms.comms-coach.englishscore.com/api/org/2/imported-conversations?filters[startDate]={{yesterday}}&filters[endDate]={{yesterday}}&filters[conversationType][0]=Voice&page=1&sort=-startDate",
+					"protocol": "https",
+					"host": [
+						"cms",
+						"comms-coach",
+						"englishscore",
+						"com"
+					],
+					"path": [
+						"api",
+						"org",
+						"2",
+						"imported-conversations"
+					],
+					"query": [
+						{
+							"key": "filters[startDate]",
+							"value": "{{yesterday}}"
+						},
+						{
+							"key": "filters[endDate]",
+							"value": "{{yesterday}}"
+						},
+						{
+							"key": "filters[conversationType][0]",
+							"value": "Voice"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "-startDate"
 						}
 					]
 				}
