@@ -138,7 +138,7 @@
 						"exec": [
 							"// Calculate yesterday's date\r",
 							"var yesterday = new Date();\r",
-							"yesterday.setDate(yesterday.getDate() - 2);\r",
+							"yesterday.setDate(yesterday.getDate() - 1);\r",
 							"var yesterdayFormatted = yesterday.toLocaleDateString(\"en-GB\"); // Format as \"dd/mm/yyyy\"\r",
 							"\r",
 							"// Set the environment variable\r",
@@ -152,20 +152,41 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"// Check if page_no is equal to 1\r",
 							"var jsonData = pm.response.json();\r",
 							"// Extract page_no\r",
 							"var page = jsonData.meta.page;\r",
 							"// Set page_no as a Postman variable\r",
 							"pm.environment.set(\"page\", page);\r",
-							"\r",
-							"// Check if page_no is equal to 1\r",
 							"pm.test(\"Verify API reponse content are OK\", function () {\r",
 							"    pm.expect(page).to.equal(1);\r",
 							"    });\r",
 							"\r",
 							"pm.test(\"Verify Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"// Parse JSON response\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Verify Data is present\", function () {\r",
+							"    pm.expect(jsonData.data.length).to.be.above(0,\"Data is Empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"// Extract page_no\r",
+							"var total = jsonData.meta.total;\r",
+							"// Set page_no as a Postman variable\r",
+							"pm.environment.set(\"total\", total);\r",
+							"console.log(\"\\n Total =\", pm.environment.get(\"total\"));\r",
+							"\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -249,6 +270,187 @@
 						},
 						{
 							"key": "filters[endDate]",
+							"value": "{{yesterday}}"
+						},
+						{
+							"key": "filters[conversationType][0]",
+							"value": "Voice"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "-startDate"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listing API_success_transcribbed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Calculate yesterday's date\r",
+							"var yesterday = new Date();\r",
+							"yesterday.setDate(yesterday.getDate() - 1);\r",
+							"var yesterdayFormatted = yesterday.toLocaleDateString(\"en-GB\"); // Format as \"dd/mm/yyyy\"\r",
+							"\r",
+							"// Set the environment variable\r",
+							"pm.environment.set(\"yesterday\", yesterdayFormatted);\r",
+							"\r",
+							"\r",
+							"// Reset the counters to 0 before each test run\r",
+							"pm.environment.set(\"final_success_count\", 0);\r",
+							"pm.environment.set(\"final_transcribed_count\", 0);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"// Test to verify conversation status\r",
+							"pm.test(\"Verify conversation status\", function () {\r",
+							"    // Check if data array is empty\r",
+							"    if (jsonData.data.length === 0) {\r",
+							"        // If data array is empty, fail the test\r",
+							"       pm.expect(jsonData.data.length).to.be.above(0, \"Data is Empty\");\r",
+							"    } else {\r",
+							"        // Loop through each item in the data array\r",
+							"        jsonData.data.forEach(function(item) {\r",
+							"            // Check if conversation_status is among \"success\" or \"transcribed\"\r",
+							"            pm.expect(item.conversation_status).to.be.oneOf([\"success\", \"transcribed\"], \"Invalid conversation status: \" + item.conversation_status);\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"// Extract page_no\r",
+							"var total = jsonData.meta.total;\r",
+							"// Set page_no as a Postman variable\r",
+							"pm.environment.set(\"total\", total);\r",
+							"\r",
+							"\r",
+							"// Parse JSON response\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Initialize counters\r",
+							"var success_count = 0;\r",
+							"var transcribed_count = 0;\r",
+							"\r",
+							"// Loop through each item in the data array\r",
+							"jsonData.data.forEach(function(item) {\r",
+							"    var conversation_status = item.conversation_status;\r",
+							"    if (conversation_status === \"success\") {\r",
+							"        success_count++;\r",
+							"    }\r",
+							"    if (conversation_status === \"transcribed\") {\r",
+							"        transcribed_count++;\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Update global counters\r",
+							"pm.environment.set(\"final_success_count\", (pm.environment.get(\"final_success_count\") || 0) + success_count);\r",
+							"pm.environment.set(\"final_transcribed_count\", (pm.environment.get(\"final_transcribed_count\") || 0) + transcribed_count);\r",
+							"\r",
+							"// Log the counts\r",
+							"console.log(\"\\n success records on page 1 =\", pm.environment.get(\"final_success_count\"));\r",
+							"console.log(\"\\n transcribed records on page 1 =\", pm.environment.get(\"final_transcribed_count\"));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Origin",
+						"value": "https://comms-coach.englishscore.com"
+					},
+					{
+						"key": "Referer",
+						"value": "https://comms-coach.englishscore.com/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
+				"url": {
+					"raw": "https://cms.comms-coach.englishscore.com/api/org/2/imported-conversations?filters[startDate]={{yesterday}}&filters[conversationType][0]=Voice&page=1&sort=-startDate",
+					"protocol": "https",
+					"host": [
+						"cms",
+						"comms-coach",
+						"englishscore",
+						"com"
+					],
+					"path": [
+						"api",
+						"org",
+						"2",
+						"imported-conversations"
+					],
+					"query": [
+						{
+							"key": "filters[startDate]",
 							"value": "{{yesterday}}"
 						},
 						{
