@@ -469,6 +469,124 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Listing API_vulnerability_recognise_yes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var page = jsonData.meta.total;\r",
+							"pm.test(\"Verify vulnerability (recognise) as YES FILTER\", function () {\r",
+							"    pm.expect(page).to.equal(351);\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Origin",
+						"value": "https://comms-coach.englishscore.com"
+					},
+					{
+						"key": "Referer",
+						"value": "https://comms-coach.englishscore.com/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
+				"url": {
+					"raw": "https://cms.comms-coach.englishscore.com/api/org/2/imported-conversations?filters[startDate]=01%2F03%2F2024&filters[endDate]=01%2F03%2F2024&filters[conversationType][0]=Voice&filters[section_1_subsection_1_goal_1_goal_name][0]=Yes&page=1&sort=-startDate",
+					"protocol": "https",
+					"host": [
+						"cms",
+						"comms-coach",
+						"englishscore",
+						"com"
+					],
+					"path": [
+						"api",
+						"org",
+						"2",
+						"imported-conversations"
+					],
+					"query": [
+						{
+							"key": "filters[startDate]",
+							"value": "01%2F03%2F2024"
+						},
+						{
+							"key": "filters[endDate]",
+							"value": "01%2F03%2F2024"
+						},
+						{
+							"key": "filters[conversationType][0]",
+							"value": "Voice"
+						},
+						{
+							"key": "filters[section_1_subsection_1_goal_1_goal_name][0]",
+							"value": "Yes"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "-startDate"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
