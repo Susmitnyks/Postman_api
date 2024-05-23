@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Token API PROD",
+			"name": "Token API - Liberis",
 			"event": [
 				{
 					"listen": "test",
@@ -104,7 +104,7 @@
 			"response": []
 		},
 		{
-			"name": "ME API LIBERIS",
+			"name": "ME API - Liberis",
 			"event": [
 				{
 					"listen": "test",
