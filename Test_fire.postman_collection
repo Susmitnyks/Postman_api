@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "e787cc82-9ae7-4ee8-907d-26b1467bcc61",
+		"name": "BROCALY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1332692",
+		"_collection_link": "https://susmit.postman.co/workspace/My-Workspace~12bfedbb-383a-47b6-8921-25e918cb9955/collection/1332692-e787cc82-9ae7-4ee8-907d-26b1467bcc61?action=share&source=collection_link&creator=1332692"
+	},
+	"item": [
+		{
+			"name": "Token API PROD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Extract token\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"access_token\", jsonData.access_token);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "content-type",
+						"value": "application/x-www-form-urlencoded;charset=utf-8"
+					},
+					{
+						"key": "origin",
+						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "client_id=16f9d357-3ffe-40dc-9039-29f9b14d810e&scope=api%3A%2F%2F5c1bd365-0696-410b-ac58-a11b8ca3c72b%2F.default%20openid%20profile%20offline_access&grant_type=refresh_token&client_info=1&x-client-SKU=msal.js.browser&x-client-VER=3.10.0&x-ms-lib-capability=retry-after, h429&x-client-current-telemetry=5|61,0,,,|,&x-client-last-telemetry=5|0|||0,0&client-request-id=018f7cc7-3d1d-7811-8869-f6cbcd92aced&refresh_token=0.Aa4AQI6NoMVMoEeB08Q7of_LXFfT-Rb-P9xAkDkp-bFNgQ6rADE.AgABAwEAAADnfolhJpSnRYB1SVj-Hgd8AgDs_wUA9P_PhNgV2o_YqZ3DpbxeNznaKz4miNeoWCRmkw9vY2K3JZzvMSacs_xp0PVZB5ciE_N0Fy28Lpzw7_Vnn5liiRobjJnpKnj3JVni_JxjdjnbzYkWIBCD2yWtOCdW0rAZ_TR0z6Ic203zCOqgHwNXaHY0M1KP9uU-ylY3VM0LR74BwKdQg7zJpJMt96KE-lxnmW0KifUC8lo4WtZN-w5TVstSkUHzsIDmJdzshO_reFlwvcnlOi0lyKR-QdFM9vuTYV-jRbiSA5E54ZsPYlCvyKXittEqntoUZMUAF9ntwq62HqqBizvDwgZyE7CrZxqFsctG13G_p2Ky1HaxtgBDqS_kQ3MEBwuqMdff0IuOlxupkUDLfr6vf4w8UEnK12tCjTPT7XsAngTleHskkYS6upKcNmFV2YrkfEBehqAgS8IuqjpJWk1VgajxRnUeCOCcPdZ81-lFix2BB2BJ4dMzKmiCe-LTeloLZ6O3B6tr9e3Cup67vzfNQ5WLwVSJ-3OofgcgPpJXfD_r2aYIeNGJhdk5WGzlI-ADX5TwdwnkGShMwUWgUGAgI7GChJZDY4A45nBGrx0Ja86CGq4na888nQqLmKkSgwefSJ3Zjpejx2_oaxYRdAOZgVrbYBZvJWAnwgPvPMLsGULjf4Mq6NK2DNhauBNGdJKP47ftf1kwLXnenkh5a7JGEXiPkVRNZmAn7cTmxok2zjVbOmj06ghus0Y_YX9DceEnGwb0eJtyWz1n06CnT_ulwKomJOOAqqbQWNsOEqTo8PUA86gycaw_Jo-QfNrOBTE6LVhUAZMzPNiltcU9Hsjm_vcItnGuJ0VRU-YYOPJtKk6-yV1gM99w1qLVggvyJfICPJNpseuUI_NowrxPfWt8xcQ3eMpABiddvYiwGX_rH5XbkaXeeO91uGMJBMyPabOyBliIiforWSZMNNzhVl_g9d79B_DtodcDNRQq6fnBlFK0yNDCCdYbVkCOEJ_gbpdX5O64ZUwyWXafTW5rYCDYPQSpL9PWH3riSHCxq7T-KV2KGY5Y5bcL3IWzBCaC6EZSHzW-qIc4gSa_AQf-cpPafEKIrNxLxHO2chZAojWBVKj13bIaScSb4vPLsUyHl2T-QOBW_dOlm8c5V2KMZx0Vs2hRXoL4DYrun-JLhPT6WrxQ1vEy_u_9_B8&X-AnchorMailbox=Oid%3A6e3b5717-de3e-4f4f-b0e8-687730b617b5%40dd5343bd-f2c4-4f9b-8178-8dfb6445911b"
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/a08d8e40-4cc5-47a0-81d3-c43ba1ffcb5c/oauth2/v2.0/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"a08d8e40-4cc5-47a0-81d3-c43ba1ffcb5c",
+						"oauth2",
+						"v2.0",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ME API LIBERIS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Email Found\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"susmit.surwade@blenheimchalcot.com\");\r",
+							"\r",
+							"pm.test(\"org assigned 'Oakbrook'\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"Oakbrook\");\r",
+							"});\r",
+							"});\r",
+							"pm.test(\"Role found 'Org Admin'\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Org Admin\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "cookie",
+						"value": "ASLBSA=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; ASLBSACORS=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; msal.client.idToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTY0NjM3MzQsIm5iZiI6MTcxNjQ2MzczNCwiZXhwIjoxNzE2NDY3NjM0LCJhaW8iOiJBUVFCKy80V0FBQUFoUFRrZTlRQUlyS3JhRkw3VkdzN1RpekF2K0Uza2RtRnBJTlF4eFJvbjhORDFudFpIUVJELzNIL2IrZlR5QUVzcEF0S1k3WkVib3ZuQUhDZFE3aWdFVVNjTG1TV0FpaWQxM1VQRWF1eE1mSGxuRm8vSHMxWm54aDRXaFJDTUI1dHB2SUdpZjB3dFZQMnZOM0dWN0ZzRGxEZGd1QjZSTjk1Sit1b1R4RVpBclc3TUNDWEV6ZWI4THF5VkUwanQyS3BYVnBqazEzd0tTT1NYT1lNMXZpS3dSNDVMN0F3Zm9QaHk0WS9SUmtWZ2xTRFJ5Ukl1bVY2YUFqSnhZc1h3OC9ybnI2b2cyNnNiNGVGMHcyM2FySjBaZlR4WlRUK1lxVGk5UmpNL1JsaU43RmpTT3hJMGpOTlBNRi9CMS9hTFJEclVLcHkwTHF4R3dpM3FkQzNHckptTXc9PSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2RkNTM0M2JkLWYyYzQtNGY5Yi04MTc4LThkZmI2NDQ1OTExYi8iLCJuYW1lIjoiU3VzbWl0IFN1cndhZGUiLCJub25jZSI6IjAxOGZhNDEwLWY3NjAtNzJiYS1hMzZmLWM3NzBmMTZmZTY3MyIsIm9pZCI6ImUwYzAwNTZiLTdlMWMtNDU2NS1iODQ5LWFjMzRhY2U4ZjU4NyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlQGJsZW5oZWltY2hhbGNvdC5jb20iLCJyaCI6IjAuQWE0QVFJNk5vTVZNb0VlQjA4UTdvZl9MWEZmVC1SYi1QOXhBa0RrcC1iRk5nUTZyQURFLiIsInN1YiI6IjJnMnN0U3JUSTMxLWh2OXFHOTQ3X2UxVURGSnVTSXZHWWM4eUtIcnAzWlEiLCJ0aWQiOiJhMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMiLCJ1dGkiOiI3QjBSLXNRSmxFR0s4d3JDb280dUFBIiwidmVyIjoiMi4wIn0.eJ6aXNjX5zRR_efOUqTcxd9NDTxn9_gmsCg4GgvhRAVFsMS28IM7HOQ6PPFpHCenV4MNzxbuNnvVDarksLXYSZU854qvrbuyv6CBcVXe4Ivl2XczXj0JTYvDwG6oEFmLA70JgCrszUUD8cCir6AHN67r7SeE8yohP9oLxOufUOSLxCk00oDpt49MSWQYf-ntYHAUCIg2A5wCFuCMndOTii0omTGb59LymqoWsddU9kb8DeBwI6llERs7BNvFL0zTIyLTLoHRO0RQZKQPg92YO_QBbPXgVJNiv0AKkhB74ffmL-WMnoh0OxYsXlZHBztlgCKtPMZF3ME6K5We3oEIWQ; msal.client.accessToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiJhcGk6Ly81YzFiZDM2NS0wNjk2LTQxMGItYWM1OC1hMTFiOGNhM2M3MmIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMvIiwiaWF0IjoxNzE2NDYzNzM0LCJuYmYiOjE3MTY0NjM3MzQsImV4cCI6MTcxNjQ2OTI4NSwiYWNyIjoiMSIsImFpbyI6IkFRUUIrLzRXQUFBQTY1b1MzMEIrWmd1RitOSDlaaWxFblRiQ3hnOHpkVGxGSjQ4VFlUWWhFZ2t2RzhSR1BVT1oydVJudGY4NTR6Nm54VCs0bUZ3dzNwNGRuY0d5WVM5dkxLZkJsamdYYWxGMkloVE1WRGxaRWdmOWdURDhFdFFwT2xmbyt5UXZaUEZ1VE1iMW5JdzkzZ1ZTQTEyRUwvcFVaRENyaVV0L0p2TUhoUUN3RjVYTmd6a2hXUnNoN1VoQVRxUDMxa3puL1NUSVM4bjJSanVrQ2VOdUMxbVhJVE9DalIrVXhxSFkxMml5YUxQMURCSWR5WUluS1F1aVg4Tm9DVXlyajRQNnp6d1VIbmF2RHB3TmtudUwvWlowSUxBaHltdGtOamRtVWc3Um1LN2ZYWUZ3cytlSU95eGJIVm5yMlZRSkJQOHdKSEhmK0RpZ2V3SEZtRC9PWlRFR1JpTjhodz09IiwiYW1yIjpbImZpZG8iLCJtZmEiXSwiYXBwaWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJhcHBpZGFjciI6IjAiLCJlbWFpbCI6InN1c21pdC5zdXJ3YWRlQGJsZW5oZWltY2hhbGNvdC5jb20iLCJncm91cHMiOlsiZGQwZWY1MjItMjMyZi00N2FlLWEwOGUtOWYyODc5MDg2YmY2IiwiN2UzYTZkMzctMTNjNy00YTZiLTk2NmQtMjBlZjc3YjBmYzU0IiwiNDA1ZDcxNDgtMDYzMS00ZGFjLWJmYjYtYzIzZmJmZjEzNTgyIiwiNDU1ZTRmNDktN2Q0Zi00ODM1LWJmNjAtYTM4YTA5MWM0MDliIiwiYWVhNGUxNTItNzJiNC00N2FkLTgxZmYtOGIwYzEzNjJmMzk0IiwiOGU5ZjM4OTEtZGQ2Ni00MDI1LWI1NzktNjhjZWJlZDZhZDgxIiwiNDdhZDA5YzgtMDIyOC00NzZhLWE0N2EtZDBjOTM2NjQzOWY2IiwiYjRlNWI5ZGUtNTNiMi00ODE0LWFkOWItNGQ0MmRkMmNmMmVmIiwiMjBhM2JkZWItOTUyMy00YmViLTlhNDktMjQyY2E4MmU5NGNiIiwiNDZiZDNkZjMtZWY2ZS00MzRmLWIwNjEtYmMzYTA0NmVmYzA0Il0sImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2RkNTM0M2JkLWYyYzQtNGY5Yi04MTc4LThkZmI2NDQ1OTExYi8iLCJpcGFkZHIiOiIxODIuNDguMjU1LjIzOCIsIm5hbWUiOiJTdXNtaXQgU3Vyd2FkZSIsIm9pZCI6ImUwYzAwNTZiLTdlMWMtNDU2NS1iODQ5LWFjMzRhY2U4ZjU4NyIsInJoIjoiMC5BYTRBUUk2Tm9NVk1vRWVCMDhRN29mX0xYR1hURzF5V0JndEJyRmloRzR5anh5dXJBREUuIiwic2NwIjoiYmFja2VuZF9hcGkiLCJzdWIiOiJaM1QzMjNZd0xsc09WNUtrR25WU0tCdEdIeUwzM2VUTkRZRTA1TFppTC00IiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidW5pcXVlX25hbWUiOiJzdXNtaXQuc3Vyd2FkZUBibGVuaGVpbWNoYWxjb3QuY29tIiwidXRpIjoiN0IwUi1zUUpsRUdLOHdyQ29vNHVBQSIsInZlciI6IjEuMCJ9.eZUS1BoVilcCs0QvzIYGrkjJ8T9uu3_w922af_aJ-Gk0wRrHHcdsrkpQ26EIVDkuEswY3hEQpSbGjyb0Gnk50JJkdlzn6qbCAtIiCwqNTmnf7p93NaAFXfnOjLn8KGXZIge-4iRcPgTg83O8568wbapZ9vjd9nflM4fNVwBfbz_4W0D9HVuP4nzPgPUqGw-l_dEE5h9p-Wg4Xj6wdSIMW_k2yxKzjZcPsy03olevShhMIRgnw-wiGc7WcooLHrAFMzf07DodN1-k_Z7oxjFXj5nm9I4Oy5EcpIXMM8ElWCp5ky7bYs_0K5n9cvAHHOu8StK0N-yeaApOAxVc9DBWSA"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/login"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "x-token-id",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTY0NjM3MzQsIm5iZiI6MTcxNjQ2MzczNCwiZXhwIjoxNzE2NDY3NjM0LCJhaW8iOiJBUVFCKy80V0FBQUFoUFRrZTlRQUlyS3JhRkw3VkdzN1RpekF2K0Uza2RtRnBJTlF4eFJvbjhORDFudFpIUVJELzNIL2IrZlR5QUVzcEF0S1k3WkVib3ZuQUhDZFE3aWdFVVNjTG1TV0FpaWQxM1VQRWF1eE1mSGxuRm8vSHMxWm54aDRXaFJDTUI1dHB2SUdpZjB3dFZQMnZOM0dWN0ZzRGxEZGd1QjZSTjk1Sit1b1R4RVpBclc3TUNDWEV6ZWI4THF5VkUwanQyS3BYVnBqazEzd0tTT1NYT1lNMXZpS3dSNDVMN0F3Zm9QaHk0WS9SUmtWZ2xTRFJ5Ukl1bVY2YUFqSnhZc1h3OC9ybnI2b2cyNnNiNGVGMHcyM2FySjBaZlR4WlRUK1lxVGk5UmpNL1JsaU43RmpTT3hJMGpOTlBNRi9CMS9hTFJEclVLcHkwTHF4R3dpM3FkQzNHckptTXc9PSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2RkNTM0M2JkLWYyYzQtNGY5Yi04MTc4LThkZmI2NDQ1OTExYi8iLCJuYW1lIjoiU3VzbWl0IFN1cndhZGUiLCJub25jZSI6IjAxOGZhNDEwLWY3NjAtNzJiYS1hMzZmLWM3NzBmMTZmZTY3MyIsIm9pZCI6ImUwYzAwNTZiLTdlMWMtNDU2NS1iODQ5LWFjMzRhY2U4ZjU4NyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlQGJsZW5oZWltY2hhbGNvdC5jb20iLCJyaCI6IjAuQWE0QVFJNk5vTVZNb0VlQjA4UTdvZl9MWEZmVC1SYi1QOXhBa0RrcC1iRk5nUTZyQURFLiIsInN1YiI6IjJnMnN0U3JUSTMxLWh2OXFHOTQ3X2UxVURGSnVTSXZHWWM4eUtIcnAzWlEiLCJ0aWQiOiJhMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMiLCJ1dGkiOiI3QjBSLXNRSmxFR0s4d3JDb280dUFBIiwidmVyIjoiMi4wIn0.eJ6aXNjX5zRR_efOUqTcxd9NDTxn9_gmsCg4GgvhRAVFsMS28IM7HOQ6PPFpHCenV4MNzxbuNnvVDarksLXYSZU854qvrbuyv6CBcVXe4Ivl2XczXj0JTYvDwG6oEFmLA70JgCrszUUD8cCir6AHN67r7SeE8yohP9oLxOufUOSLxCk00oDpt49MSWQYf-ntYHAUCIg2A5wCFuCMndOTii0omTGb59LymqoWsddU9kb8DeBwI6llERs7BNvFL0zTIyLTLoHRO0RQZKQPg92YO_QBbPXgVJNiv0AKkhB74ffmL-WMnoh0OxYsXlZHBztlgCKtPMZF3ME6K5We3oEIWQ"
+					}
+				],
+				"url": {
+					"raw": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/api/users/me",
+					"protocol": "https",
+					"host": [
+						"prd-brocaly-d0d5h0a3deaedvbq",
+						"z02",
+						"azurefd",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
