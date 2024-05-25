@@ -9,7 +9,7 @@ steps:
     npm install -g newman newman-reporter-htmlextra
   displayName: 'Install Newman and Html reporter'
   
-- powershell: |
+- script: |
     mkdir $(Build.ArtifactStagingDirectory)/reports
     newman run Test_fire.postman_collection.json -r htmlextra --reporter-htmlextra-export $(Build.ArtifactStagingDirectory)/reports/report.html
   displayName: 'Run API Test and Create Reports Directory'
