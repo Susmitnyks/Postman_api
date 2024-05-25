@@ -1,10 +1,8 @@
 {
 	"info": {
-		"_postman_id": "e787cc82-9ae7-4ee8-907d-26b1467bcc61",
+		"_postman_id": "5dc0d179-aeda-45f2-88b3-78e263094755",
 		"name": "BROCALY",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "1332692",
-		"_collection_link": "https://susmit.postman.co/workspace/My-Workspace~12bfedbb-383a-47b6-8921-25e918cb9955/collection/1332692-e787cc82-9ae7-4ee8-907d-26b1467bcc61?action=share&source=collection_link&creator=1332692"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -14,14 +12,19 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Extract token\", function () {\r",
+							"pm.test(\"Extract access token\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.environment.set(\"access_token\", jsonData.access_token);\r",
 							"});\r",
+							"\r",
+							"pm.test(\"Extract refresh token\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"refresh_token\", jsonData.refresh_token);\r",
+							"});\r",
+							"\r",
 							""
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -83,7 +86,12 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "client_id=16f9d357-3ffe-40dc-9039-29f9b14d810e&scope=api%3A%2F%2F5c1bd365-0696-410b-ac58-a11b8ca3c72b%2F.default%20openid%20profile%20offline_access&grant_type=refresh_token&client_info=1&x-client-SKU=msal.js.browser&x-client-VER=3.10.0&x-ms-lib-capability=retry-after, h429&x-client-current-telemetry=5|61,0,,,|,&x-client-last-telemetry=5|0|||0,0&client-request-id=018f7cc7-3d1d-7811-8869-f6cbcd92aced&refresh_token=0.Aa4AQI6NoMVMoEeB08Q7of_LXFfT-Rb-P9xAkDkp-bFNgQ6rADE.AgABAwEAAADnfolhJpSnRYB1SVj-Hgd8AgDs_wUA9P_PhNgV2o_YqZ3DpbxeNznaKz4miNeoWCRmkw9vY2K3JZzvMSacs_xp0PVZB5ciE_N0Fy28Lpzw7_Vnn5liiRobjJnpKnj3JVni_JxjdjnbzYkWIBCD2yWtOCdW0rAZ_TR0z6Ic203zCOqgHwNXaHY0M1KP9uU-ylY3VM0LR74BwKdQg7zJpJMt96KE-lxnmW0KifUC8lo4WtZN-w5TVstSkUHzsIDmJdzshO_reFlwvcnlOi0lyKR-QdFM9vuTYV-jRbiSA5E54ZsPYlCvyKXittEqntoUZMUAF9ntwq62HqqBizvDwgZyE7CrZxqFsctG13G_p2Ky1HaxtgBDqS_kQ3MEBwuqMdff0IuOlxupkUDLfr6vf4w8UEnK12tCjTPT7XsAngTleHskkYS6upKcNmFV2YrkfEBehqAgS8IuqjpJWk1VgajxRnUeCOCcPdZ81-lFix2BB2BJ4dMzKmiCe-LTeloLZ6O3B6tr9e3Cup67vzfNQ5WLwVSJ-3OofgcgPpJXfD_r2aYIeNGJhdk5WGzlI-ADX5TwdwnkGShMwUWgUGAgI7GChJZDY4A45nBGrx0Ja86CGq4na888nQqLmKkSgwefSJ3Zjpejx2_oaxYRdAOZgVrbYBZvJWAnwgPvPMLsGULjf4Mq6NK2DNhauBNGdJKP47ftf1kwLXnenkh5a7JGEXiPkVRNZmAn7cTmxok2zjVbOmj06ghus0Y_YX9DceEnGwb0eJtyWz1n06CnT_ulwKomJOOAqqbQWNsOEqTo8PUA86gycaw_Jo-QfNrOBTE6LVhUAZMzPNiltcU9Hsjm_vcItnGuJ0VRU-YYOPJtKk6-yV1gM99w1qLVggvyJfICPJNpseuUI_NowrxPfWt8xcQ3eMpABiddvYiwGX_rH5XbkaXeeO91uGMJBMyPabOyBliIiforWSZMNNzhVl_g9d79B_DtodcDNRQq6fnBlFK0yNDCCdYbVkCOEJ_gbpdX5O64ZUwyWXafTW5rYCDYPQSpL9PWH3riSHCxq7T-KV2KGY5Y5bcL3IWzBCaC6EZSHzW-qIc4gSa_AQf-cpPafEKIrNxLxHO2chZAojWBVKj13bIaScSb4vPLsUyHl2T-QOBW_dOlm8c5V2KMZx0Vs2hRXoL4DYrun-JLhPT6WrxQ1vEy_u_9_B8&X-AnchorMailbox=Oid%3A6e3b5717-de3e-4f4f-b0e8-687730b617b5%40dd5343bd-f2c4-4f9b-8178-8dfb6445911b"
+					"raw": "client_id=16f9d357-3ffe-40dc-9039-29f9b14d810e&scope=api%3A%2F%2F5c1bd365-0696-410b-ac58-a11b8ca3c72b%2F.default%20openid%20profile%20offline_access&grant_type=refresh_token&client_info=1&x-client-SKU=msal.js.browser&x-client-VER=3.10.0&x-ms-lib-capability=retry-after, h429&x-client-current-telemetry=5|61,0,,,|,&x-client-last-telemetry=5|0|||0,0&client-request-id=018f7cc7-3d1d-7811-8869-f6cbcd92aced&refresh_token={{refresh_token}}&X-AnchorMailbox=Oid%3A6e3b5717-de3e-4f4f-b0e8-687730b617b5%40dd5343bd-f2c4-4f9b-8178-8dfb6445911b\r\n",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
 				},
 				"url": {
 					"raw": "https://login.microsoftonline.com/a08d8e40-4cc5-47a0-81d3-c43ba1ffcb5c/oauth2/v2.0/token",
@@ -125,8 +133,7 @@
 							"    pm.expect(pm.response.text()).to.include(\"Org Admin\");\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
