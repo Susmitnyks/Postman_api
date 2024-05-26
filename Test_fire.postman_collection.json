@@ -218,6 +218,163 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Conversation Listing (Voice) : This Week - Liberis",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Data Array is Non-Empty\", function () {\r",
+							"    pm.expect(pm.response.json().data.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Text contains 'Voice'\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Voice\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Calculate the start date of the current week (Monday)\r",
+							"var currentDate = new Date();\r",
+							"var currentDay = currentDate.getDay(); // Sunday is 0, Monday is 1, etc.\r",
+							"var diff = currentDate.getDate() - currentDay + (currentDay === 0 ? -6 : 1); // Adjust when current day is Sunday\r",
+							"var mondayDate = new Date(currentDate.setDate(diff));\r",
+							"\r",
+							"// Format the date as dd/mm/yyyy\r",
+							"var formattedDate = mondayDate.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\\//g, '%2F');\r",
+							"\r",
+							"// Set the start date parameter in the URL\r",
+							"pm.variables.set('startDate', formattedDate);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "cookie",
+						"value": "ai_user=lmav9Bn/JmuomnCabK6M3g|2024-05-23T11:33:55.874Z; ASLBSA=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; ASLBSACORS=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; organization=2; msal.client.idToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTY2NDg4MTQsIm5iZiI6MTcxNjY0ODgxNCwiZXhwIjoxNzE2NjUyNzE0LCJhaW8iOiJBUVFCKy80V0FBQUFieHQ5aVBNbTdkK05IaXNBTjQzQUh0d0xieHEwLzRnYXVvdExJcWNJNU0vbXlrbEhBdE8vM0FqY200TWZCOFJyMWF0SnkwN2liU1owTWhvMk40TzZjODJmc2lMYVdvRm1oS0huZ29WYlFYTU5CMjhXeXpZdE1iWHpFMTFmeWxjNnJBUEh2Y05nZmR1ZnJnVUppYkd5eVBIODZJZlZ3VDFrYk93c2xjazFZenBISklRalA4UXJJdTZBSUY2TUN1ZzVmbURHdGV2MmpsVVlXcVpheG9yNGJXazZpb1pwL1hjaXNjRVhTeUZHYnUxUHFITnBGSWVYYjBjUDdXaElPUTZQVEhLKzFjeU1aNWVPZHN1ckJDY2RtdUhCL0c4MFFRbW1uQkpkdk5IR2xhbmw5dVcrK2xVK052NWJWbFhYMmU5RVdKV3F0RFNvRThHWFBDZlVqSGtjQkE9PSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2RkNTM0M2JkLWYyYzQtNGY5Yi04MTc4LThkZmI2NDQ1OTExYi8iLCJuYW1lIjoiU3VzbWl0IFN1cndhZGUiLCJub25jZSI6IjAxOGZhZmNhLTY5NDQtN2Q2Zi05Nzg0LWQzNGNmMTZhZWU1MCIsIm9pZCI6ImUwYzAwNTZiLTdlMWMtNDU2NS1iODQ5LWFjMzRhY2U4ZjU4NyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlQGJsZW5oZWltY2hhbGNvdC5jb20iLCJyaCI6IjAuQWE0QVFJNk5vTVZNb0VlQjA4UTdvZl9MWEZmVC1SYi1QOXhBa0RrcC1iRk5nUTZyQURFLiIsInN1YiI6IjJnMnN0U3JUSTMxLWh2OXFHOTQ3X2UxVURGSnVTSXZHWWM4eUtIcnAzWlEiLCJ0aWQiOiJhMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMiLCJ1dGkiOiJlZkJSQ2dRd0dVR1gwX2wzeUdCWkFBIiwidmVyIjoiMi4wIn0.ZBWsYq_9tgJy-IEehMXTyYKDZq1wrr7VJsUdyCm6YPpUZgD2tTQzDOk-guL1iEn-GVgXHHgryrUS1CZPLO-I6mOl1Rel7NbBCRbNkZB6VwX_67DXNmgTCtw4LKZtLyHU8Sv9HtaFWtWCB_4jvPxYGkXDT3AfijDlHedmiMjXHtBsTdel9vScg53hlc-M2Vm5MkyF6Y6xOoTsht2nFN9KuuDIjOVCmOSBf3cXwyg5FzotLIZJn-Gtcu8h7cWDSJIZRWoszb4ObRrZ2pjDsMdS3Wxvl-NDr7f6p0rYl06Xo5ZdInWKO3Z8jfuxNsXRz8HbDA-j0y_M87MEVlas6KVunA; msal.client.accessToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiJhcGk6Ly81YzFiZDM2NS0wNjk2LTQxMGItYWM1OC1hMTFiOGNhM2M3MmIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMvIiwiaWF0IjoxNzE2NjQ4ODE0LCJuYmYiOjE3MTY2NDg4MTQsImV4cCI6MTcxNjY1MzIyMiwiYWNyIjoiMSIsImFpbyI6IkFRUUIrLzRXQUFBQUxUV25jL2tHQnNhYWtDWldmdjFOOUlxb1dQTGE2NDBGczA1SEcxaDkyYS95R3RESGtPS0JaTHZwZ0FDdjZET1lvQjFQSVdPNVMvTGFjZU10bFkzVXFJUytiQ0ErTkJQYjl2dElJSkNNQ044Smdhc3hBZy9DekdqVEhkS3JwSWZMR2tDNUh2Qk9kOGFPRzBWZWlDY3g2Y1pIK0ZVLzJNZ1ExZlhXaWs3ZFpwRnJnZk14S3lHcmNmVDZrcHJBbWk3TUtYZ0tHWnZZYlFQWDRvVGJabFBzOUxOeUdyS0YzMU9hN2Z0dDBMZi9UT0dnZ3hyY0VBZklaS0x3dWhYNERIdUVhclVRdUdhRHQ2Ui9zOXNGVTUvWlRlVXBPNXhZVDdaNkExUnoyNGx5SDAyMk5Zc1ZHajVmbHlxbkR1azByc1J5WVBBMVJ0djFEUm5IOTA5UjkvRVhDUT09IiwiYW1yIjpbImZpZG8iLCJtZmEiXSwiYXBwaWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJhcHBpZGFjciI6IjAiLCJlbWFpbCI6InN1c21pdC5zdXJ3YWRlQGJsZW5oZWltY2hhbGNvdC5jb20iLCJncm91cHMiOlsiZGQwZWY1MjItMjMyZi00N2FlLWEwOGUtOWYyODc5MDg2YmY2IiwiN2UzYTZkMzctMTNjNy00YTZiLTk2NmQtMjBlZjc3YjBmYzU0IiwiNDA1ZDcxNDgtMDYzMS00ZGFjLWJmYjYtYzIzZmJmZjEzNTgyIiwiNDU1ZTRmNDktN2Q0Zi00ODM1LWJmNjAtYTM4YTA5MWM0MDliIiwiYWVhNGUxNTItNzJiNC00N2FkLTgxZmYtOGIwYzEzNjJmMzk0IiwiOGU5ZjM4OTEtZGQ2Ni00MDI1LWI1NzktNjhjZWJlZDZhZDgxIiwiNDdhZDA5YzgtMDIyOC00NzZhLWE0N2EtZDBjOTM2NjQzOWY2IiwiYjRlNWI5ZGUtNTNiMi00ODE0LWFkOWItNGQ0MmRkMmNmMmVmIiwiMjBhM2JkZWItOTUyMy00YmViLTlhNDktMjQyY2E4MmU5NGNiIiwiNDZiZDNkZjMtZWY2ZS00MzRmLWIwNjEtYmMzYTA0NmVmYzA0Il0sImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2RkNTM0M2JkLWYyYzQtNGY5Yi04MTc4LThkZmI2NDQ1OTExYi8iLCJpcGFkZHIiOiIyMDMuMTkyLjIwMS4yMjQiLCJuYW1lIjoiU3VzbWl0IFN1cndhZGUiLCJvaWQiOiJlMGMwMDU2Yi03ZTFjLTQ1NjUtYjg0OS1hYzM0YWNlOGY1ODciLCJyaCI6IjAuQWE0QVFJNk5vTVZNb0VlQjA4UTdvZl9MWEdYVEcxeVdCZ3RCckZpaEc0eWp4eXVyQURFLiIsInNjcCI6ImJhY2tlbmRfYXBpIiwic3ViIjoiWjNUMzIzWXdMbHNPVjVLa0duVlNLQnRHSHlMMzNlVE5EWUUwNUxaaUwtNCIsInRpZCI6ImEwOGQ4ZTQwLTRjYzUtNDdhMC04MWQzLWM0M2JhMWZmY2I1YyIsInVuaXF1ZV9uYW1lIjoic3VzbWl0LnN1cndhZGVAYmxlbmhlaW1jaGFsY290LmNvbSIsInV0aSI6ImVmQlJDZ1F3R1VHWDBfbDN5R0JaQUEiLCJ2ZXIiOiIxLjAifQ.OYf3m3GO9Dt5lF8Y87T7FF-RtRYIiMmaeGT-Y-OFPKepI8TUTBT7ir2EQM-Pg4fxASDFeAJrvEtDSJw_nGiKCZBJmoLUsXDhVvqsQ84jh2-rbPt6LGVNxZFd7Nq_2TOi8TmkYw_UsNeyaHcARZw5U5gSq5ssvdlxcIBWokY6Vin8h5PVxcvuA09SODJoSLzC2ht2naiRpfwJ4MmT37Yq2Iclf3s6aHbfPgZ6_8Gk3A3zhe7zQYIUfnGHonOBBxSV8Orvsuq_5PNINhBdEPAh-OLkDOkdvTMHVZ57MekwdAYDnvu8ZkNmtbZVKcqVq6qGwz5TXnX_XZcYj4iuvY_PgA; ai_session=mR6okrfoOsrrmbZvuNyiGt|1716648420928|1716649123121"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/conversations"
+					},
+					{
+						"key": "request-context",
+						"value": "appId=cid-v1:37e39a7a-255f-4966-b015-42130889ffc8"
+					},
+					{
+						"key": "request-id",
+						"value": "|fc06e302cd3d4da886476fb3f5444cff.087e81c6e0624b52"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "traceparent",
+						"value": "00-fc06e302cd3d4da886476fb3f5444cff-087e81c6e0624b52-01"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "x-token-id",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTY2NDg4MTQsIm5iZiI6MTcxNjY0ODgxNCwiZXhwIjoxNzE2NjUyNzE0LCJhaW8iOiJBUVFCKy80V0FBQUFieHQ5aVBNbTdkK05IaXNBTjQzQUh0d0xieHEwLzRnYXVvdExJcWNJNU0vbXlrbEhBdE8vM0FqY200TWZCOFJyMWF0SnkwN2liU1owTWhvMk40TzZjODJmc2lMYVdvRm1oS0huZ29WYlFYTU5CMjhXeXpZdE1iWHpFMTFmeWxjNnJBUEh2Y05nZmR1ZnJnVUppYkd5eVBIODZJZlZ3VDFrYk93c2xjazFZenBISklRalA4UXJJdTZBSUY2TUN1ZzVmbURHdGV2MmpsVVlXcVpheG9yNGJXazZpb1pwL1hjaXNjRVhTeUZHYnUxUHFITnBGSWVYYjBjUDdXaElPUTZQVEhLKzFjeU1aNWVPZHN1ckJDY2RtdUhCL0c4MFFRbW1uQkpkdk5IR2xhbmw5dVcrK2xVK052NWJWbFhYMmU5RVdKV3F0RFNvRThHWFBDZlVqSGtjQkE9PSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2RkNTM0M2JkLWYyYzQtNGY5Yi04MTc4LThkZmI2NDQ1OTExYi8iLCJuYW1lIjoiU3VzbWl0IFN1cndhZGUiLCJub25jZSI6IjAxOGZhZmNhLTY5NDQtN2Q2Zi05Nzg0LWQzNGNmMTZhZWU1MCIsIm9pZCI6ImUwYzAwNTZiLTdlMWMtNDU2NS1iODQ5LWFjMzRhY2U4ZjU4NyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlQGJsZW5oZWltY2hhbGNvdC5jb20iLCJyaCI6IjAuQWE0QVFJNk5vTVZNb0VlQjA4UTdvZl9MWEZmVC1SYi1QOXhBa0RrcC1iRk5nUTZyQURFLiIsInN1YiI6IjJnMnN0U3JUSTMxLWh2OXFHOTQ3X2UxVURGSnVTSXZHWWM4eUtIcnAzWlEiLCJ0aWQiOiJhMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMiLCJ1dGkiOiJlZkJSQ2dRd0dVR1gwX2wzeUdCWkFBIiwidmVyIjoiMi4wIn0.ZBWsYq_9tgJy-IEehMXTyYKDZq1wrr7VJsUdyCm6YPpUZgD2tTQzDOk-guL1iEn-GVgXHHgryrUS1CZPLO-I6mOl1Rel7NbBCRbNkZB6VwX_67DXNmgTCtw4LKZtLyHU8Sv9HtaFWtWCB_4jvPxYGkXDT3AfijDlHedmiMjXHtBsTdel9vScg53hlc-M2Vm5MkyF6Y6xOoTsht2nFN9KuuDIjOVCmOSBf3cXwyg5FzotLIZJn-Gtcu8h7cWDSJIZRWoszb4ObRrZ2pjDsMdS3Wxvl-NDr7f6p0rYl06Xo5ZdInWKO3Z8jfuxNsXRz8HbDA-j0y_M87MEVlas6KVunA"
+					}
+				],
+				"url": {
+					"raw": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/api/org/2/imported-conversations?filters\\[startDate\\]={{startDate}}&filters\\[conversationType\\]\\[0\\]=Voice&page=1&sort=-startDate",
+					"protocol": "https",
+					"host": [
+						"prd-brocaly-d0d5h0a3deaedvbq",
+						"z02",
+						"azurefd",
+						"net"
+					],
+					"path": [
+						"api",
+						"org",
+						"2",
+						"imported-conversations"
+					],
+					"query": [
+						{
+							"key": "filters\\[startDate\\]",
+							"value": "{{startDate}}"
+						},
+						{
+							"key": "filters\\[conversationType\\]\\[0\\]",
+							"value": "Voice"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "-startDate"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
