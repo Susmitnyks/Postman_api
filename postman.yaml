@@ -10,12 +10,10 @@ steps:
   displayName: 'Install Newman and Html reporter'
   
 - script: |
-    mkdir -p $(Build.ArtifactStagingDirectory)/reports
-    REPORT_NAME="report_$(date +%d-%m-%Y).html"
-    REPORT_PATH="$(Build.ArtifactStagingDirectory)/reports/$REPORT_NAME"
-    newman run Test_fire.postman_collection.json --environment Brocaly.postman_environment.json -r htmlextra --reporter-htmlextra-export $REPORT_PATH
-    echo "##vso[task.setvariable variable=REPORT_PATH]$REPORT_PATH"
+    mkdir $(Build.ArtifactStagingDirectory)/reports
+    newman run Test_fire.postman_collection.json --environment Brocaly.postman_environment.json -r htmlextra --reporter-htmlextra-export $(Build.ArtifactStagingDirectory)/reports/report.html
   displayName: 'Run API Test and Create Reports Directory'
+
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish HTML Report'
@@ -33,7 +31,6 @@ steps:
       $from = "susmit.s.surwade@gmail.com"
       $to = @("lokesh.singh@blenheimchalcot.com","susmit.surwade@blenheimchalcot.com","satyendra.kumar@blenheimchalcot.com","rinkesh.das@blenheimchalcot.com","ami.jambusaria@blenheimchalcot.com")
       #$to = @("susmit.surwade@blenheimchalcot.com")
-      
       # Get today's date
       $todayDate = Get-Date -Format "dd-MM-yyyy"
 
@@ -47,10 +44,10 @@ steps:
       $project = "SusmitDemo"
 
       # Email body
-      $emailBody = "Please find the attached API's health report."
+      $emailBody = "Please find the attached api's health report."
 
-      # Path to the HTML report with today's date
-      $attachmentPath = "$(REPORT_PATH)"
+      # Path to the HTML report
+      $attachmentPath = "$(Build.ArtifactStagingDirectory)/reports/report.html"
 
       # Send email with attached HTML report using TLS/SSL
       $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
