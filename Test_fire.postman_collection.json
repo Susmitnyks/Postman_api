@@ -21,6 +21,9 @@
 							"    var jsonData = pm.response.json();\r",
 							"    pm.environment.set(\"refresh_token\", jsonData.refresh_token);\r",
 							"});\r",
+							"pm.test(\"Verify Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
 							"\r",
 							""
 						],
@@ -113,18 +116,18 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
+							"pm.test(\"Verify Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Email Found\", function () {\r",
+							"pm.test(\"Verify Email Found\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"susmit.surwade_oakbrook@brocaly.com\");\r",
 							"\r",
-							"pm.test(\"org assigned 'Oakbrook'\", function () {\r",
+							"pm.test(\"Verify org assigned 'Oakbrook'\", function () {\r",
 							"     pm.expect(pm.response.text()).to.include(\"Oakbrook\");\r",
 							"});\r",
 							"});\r",
-							"pm.test(\"Role found 'Org Admin'\", function () {\r",
+							"pm.test(\"Verify Role found 'Org Admin'\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"Org Admin\");\r",
 							"});"
 						],
@@ -221,15 +224,15 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
+							"pm.test(\"Verify Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Data Array is Non-Empty\", function () {\r",
+							"pm.test(\"Verify Data Array is Non-Empty\", function () {\r",
 							"    pm.expect(pm.response.json().data.length).to.be.above(0);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Response Text contains 'Voice'\", function () {\r",
+							"pm.test(\"Verify Response Text contains 'Voice'\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"Voice\");\r",
 							"});\r",
 							""
@@ -543,15 +546,15 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
+							"pm.test(\"Verify Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Data Array is Non-Empty\", function () {\r",
+							"pm.test(\"Verify Data Array is Non-Empty\", function () {\r",
 							"    pm.expect(pm.response.json().data.length).to.be.above(0);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Response Text contains 'Voice'\", function () {\r",
+							"pm.test(\"Verify Response Text contains 'Voice'\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"Voice\");\r",
 							"});\r",
 							""
@@ -658,6 +661,158 @@
 						},
 						{
 							"key": "filters\\[conversationType\\]\\[0\\]",
+							"value": "Voice"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "-startDate"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Conversation Listing (Voice): Choose Date API - Oakbrook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// Parse the JSON response\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Assert that total equals 712\r",
+							"pm.test(\"Verify Total record for 28/5/2024 equals 712\", function () {\r",
+							"    pm.expect(jsonData.meta.total).to.eql(712);\r",
+							"});\r",
+							"\r",
+							"// Assert that data array is non-empty\r",
+							"pm.test(\"Verify Data array is non-empty\", function () {\r",
+							"    pm.expect(jsonData.data.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"// Assert that agent_name \"Tharwat Daniels\" exists in the data array\r",
+							"pm.test(\"Verify Agent name 'Tharwat Daniels' exists\", function () {\r",
+							"    let agentFound = jsonData.data.some(function (agent) {\r",
+							"        return agent.agent_name === \"Tharwat Daniels\";\r",
+							"    });\r",
+							"    pm.expect(agentFound).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "cookie",
+						"value": "ASLBSA=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; ASLBSACORS=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; ai_user=z83Ccwr9AUqg20PKoZoV4k|2024-05-31T18:31:21.894Z; organization=2; msal.client.idToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTcyNTYxODYsIm5iZiI6MTcxNzI1NjE4NiwiZXhwIjoxNzE3MjYwMDg2LCJhaW8iOiJBV1FBbS84V0FBQUFhbUZkQXdhcCtvRnJUUXFTZWNkK21pajZ6OVdjQmxoWHllblZjbzZmUGttT2cwQnlUUU9YQkV6K2VTRlpHVHpJRTVWcHlZVTlaZ1Q3WDRnWHVOR2o1c01FamdCMm45VXhPS2IzeHptK1RCK2FjVGJjaGdOMTdBSStrZnp1UGdXUiIsIm5hbWUiOiJTdXNtaXQgTGliZXJpcyIsIm5vbmNlIjoiMDE4ZmQwMjctMTdlOS03ZDJiLWFiYWYtYjk4ZDg5ZmU0YWM1Iiwib2lkIjoiYmZmMDNlODAtNDRmNC00MDM4LWIzYjItYjQ0NzExYWNiN2NjIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic3VzbWl0LnN1cndhZGVfb2FrYnJvb2tAYnJvY2FseS5jb20iLCJyaCI6IjAuQWE0QVFJNk5vTVZNb0VlQjA4UTdvZl9MWEZmVC1SYi1QOXhBa0RrcC1iRk5nUTZyQUQ0LiIsInN1YiI6Ii0xOWthVDlnb0NYdEY3UEY3aGVoUm1zMWJFNVo5OU03MldnMXhLSzlrVWMiLCJ0aWQiOiJhMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMiLCJ1dGkiOiJkeE9IQUltZVBFNmxTc29GRzJwYUFBIiwidmVyIjoiMi4wIn0.AerR9ZmHKaEB8_hfZNUiHIX9l6yk7-QGg1Yw3w2ORVkaosDPlk1QLh-YfnCMniEAul--Gg62G2bOVTFt-njARdqOj9uoXBDnJxgJQlXQFFODprfUdQsJySXjnQ6Ac6mCeEeIO3dALsXN2X3BAV6kRJ-59Gztus8-M-7hY7GNhTFAhGrH9g0NE-LjSGv-NpfIwEr3hJBH3trSbIxzXMtTqaG8izxGMM0szoiFbfGmoevLFk4EnC4m65uFyu6tICXf2Fvqo4mfqq9u3fn1sWBH-ToMoRMjQeqMTF_2MSLLeHs4nNVCpBf3SEl0fE3c03k2kVHJBoqfSPmMKr2QUXkKFw; msal.client.accessToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiJhcGk6Ly81YzFiZDM2NS0wNjk2LTQxMGItYWM1OC1hMTFiOGNhM2M3MmIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMvIiwiaWF0IjoxNzE3MjU2MTg2LCJuYmYiOjE3MTcyNTYxODYsImV4cCI6MTcxNzI2MTQ5NCwiYWNyIjoiMSIsImFpbyI6IkFWUUFxLzhXQUFBQUp0MHUrek8vTVpTZ3h0K0p1dG40c2V4VjQvZXArYXQvRGkrSUh5dkxZdno4SlhYaG9mS1RzeXFnaC9IMXEvWCtUc2ZtcEtNb1lUMnJxZ1ZNVWVhOVQzSjlxVGVZcXVYVWhrU2ptZEdaT2FrPSIsImFtciI6WyJwd2QiLCJtZmEiXSwiYXBwaWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJhcHBpZGFjciI6IjAiLCJncm91cHMiOlsiZGQwZWY1MjItMjMyZi00N2FlLWEwOGUtOWYyODc5MDg2YmY2IiwiNDA1ZDcxNDgtMDYzMS00ZGFjLWJmYjYtYzIzZmJmZjEzNTgyIiwiNDU1ZTRmNDktN2Q0Zi00ODM1LWJmNjAtYTM4YTA5MWM0MDliIiwiNDEzODhjYjAtZTVmMS00NGEyLWE0MjgtYmYxNTYzOWE5MjQzIiwiNDdhZDA5YzgtMDIyOC00NzZhLWE0N2EtZDBjOTM2NjQzOWY2IiwiYjRlNWI5ZGUtNTNiMi00ODE0LWFkOWItNGQ0MmRkMmNmMmVmIiwiZmVhY2NmZWMtOWNkNS00ODU2LWI0M2QtODFjYTQ5MThkZjhlIiwiNDZiZDNkZjMtZWY2ZS00MzRmLWIwNjEtYmMzYTA0NmVmYzA0Il0sImlwYWRkciI6IjIwMy4xOTIuMjAxLjI0MSIsIm5hbWUiOiJTdXNtaXQgTGliZXJpcyIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInJoIjoiMC5BYTRBUUk2Tm9NVk1vRWVCMDhRN29mX0xYR1hURzF5V0JndEJyRmloRzR5anh5dXJBRDQuIiwic2NwIjoiYmFja2VuZF9hcGkiLCJzdWIiOiJqWDJTTVdlaEY5anpRREJ6LWlaTzVxaUN3Rm9sSWJmRFpYSUlaZWRzaGVZIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidW5pcXVlX25hbWUiOiJzdXNtaXQuc3Vyd2FkZV9vYWticm9va0Bicm9jYWx5LmNvbSIsInVwbiI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwidXRpIjoiZHhPSEFJbWVQRTZsU3NvRkcycGFBQSIsInZlciI6IjEuMCJ9.DqBzRXbU4N6Y7xnOLpqVwAOLvTTU2-qwWbt0CzdJlaYPg_ZAIipA8MoEv53pMQEx5GtEoNPu9zzUVvkC4W5YYWkPfPdzZV-r7i0gWBqp7pROw2oi2q6NjwJYAWJXujY6za5jnSYHkQQao8Plx_5nLZwntaEShOodtoAz59u0-sHX1pUP_4QKqQW_upaIhxaK64UIYsVRxSByXNtyf-xP3KE5W3BjuW5DvS_vCQ97QdVw-gKoWdYOdnxK0zNL-i1PAcVHW9Fdc-sN-kFb1QpRI1515zvzWzLfaO_DC4vl92kxV8OWvNExRQskz0KWv-hFVGQzgDZy9fzyOdQdK8q31Q; ai_session=aoX/VXKD8HdjPEGEXw4xuw|1717255882871|1717256571272"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/conversations"
+					},
+					{
+						"key": "request-context",
+						"value": "appId=cid-v1:37e39a7a-255f-4966-b015-42130889ffc8"
+					},
+					{
+						"key": "request-id",
+						"value": "|d7a05e8c25cb4afca3b16547349801ac.8ca6f771c88048ef"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"125\", \"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "traceparent",
+						"value": "00-d7a05e8c25cb4afca3b16547349801ac-8ca6f771c88048ef-01"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "x-token-id",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IkwxS2ZLRklfam5YYndXYzIyeFp4dzFzVUhIMCJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTcyNTYxODYsIm5iZiI6MTcxNzI1NjE4NiwiZXhwIjoxNzE3MjYwMDg2LCJhaW8iOiJBV1FBbS84V0FBQUFhbUZkQXdhcCtvRnJUUXFTZWNkK21pajZ6OVdjQmxoWHllblZjbzZmUGttT2cwQnlUUU9YQkV6K2VTRlpHVHpJRTVWcHlZVTlaZ1Q3WDRnWHVOR2o1c01FamdCMm45VXhPS2IzeHptK1RCK2FjVGJjaGdOMTdBSStrZnp1UGdXUiIsIm5hbWUiOiJTdXNtaXQgTGliZXJpcyIsIm5vbmNlIjoiMDE4ZmQwMjctMTdlOS03ZDJiLWFiYWYtYjk4ZDg5ZmU0YWM1Iiwib2lkIjoiYmZmMDNlODAtNDRmNC00MDM4LWIzYjItYjQ0NzExYWNiN2NjIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic3VzbWl0LnN1cndhZGVfb2FrYnJvb2tAYnJvY2FseS5jb20iLCJyaCI6IjAuQWE0QVFJNk5vTVZNb0VlQjA4UTdvZl9MWEZmVC1SYi1QOXhBa0RrcC1iRk5nUTZyQUQ0LiIsInN1YiI6Ii0xOWthVDlnb0NYdEY3UEY3aGVoUm1zMWJFNVo5OU03MldnMXhLSzlrVWMiLCJ0aWQiOiJhMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMiLCJ1dGkiOiJkeE9IQUltZVBFNmxTc29GRzJwYUFBIiwidmVyIjoiMi4wIn0.AerR9ZmHKaEB8_hfZNUiHIX9l6yk7-QGg1Yw3w2ORVkaosDPlk1QLh-YfnCMniEAul--Gg62G2bOVTFt-njARdqOj9uoXBDnJxgJQlXQFFODprfUdQsJySXjnQ6Ac6mCeEeIO3dALsXN2X3BAV6kRJ-59Gztus8-M-7hY7GNhTFAhGrH9g0NE-LjSGv-NpfIwEr3hJBH3trSbIxzXMtTqaG8izxGMM0szoiFbfGmoevLFk4EnC4m65uFyu6tICXf2Fvqo4mfqq9u3fn1sWBH-ToMoRMjQeqMTF_2MSLLeHs4nNVCpBf3SEl0fE3c03k2kVHJBoqfSPmMKr2QUXkKFw"
+					}
+				],
+				"url": {
+					"raw": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/api/org/2/imported-conversations?filters[startDate]=28%2F05%2F2024&filters[endDate]=28%2F05%2F2024&filters[conversationType][0]=Voice&page=1&sort=-startDate",
+					"protocol": "https",
+					"host": [
+						"prd-brocaly-d0d5h0a3deaedvbq",
+						"z02",
+						"azurefd",
+						"net"
+					],
+					"path": [
+						"api",
+						"org",
+						"2",
+						"imported-conversations"
+					],
+					"query": [
+						{
+							"key": "filters[startDate]",
+							"value": "28%2F05%2F2024"
+						},
+						{
+							"key": "filters[endDate]",
+							"value": "28%2F05%2F2024"
+						},
+						{
+							"key": "filters[conversationType][0]",
 							"value": "Voice"
 						},
 						{
