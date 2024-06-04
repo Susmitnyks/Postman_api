@@ -10,9 +10,14 @@ steps:
     displayName: 'Install Newman and Html reporter'
 
   - script: |
-      mkdir "$(Build.ArtifactStagingDirectory)\reports" || exit /b 1
-      newman run Test_fire.postman_collection.json --environment Brocaly.postman_environment.json -r htmlextra --reporter-htmlextra-export "$(Build.ArtifactStagingDirectory)\reports\report.html" || exit /b 1
+      echo "Creating reports directory..."
+      mkdir "$(Build.ArtifactStagingDirectory)\reports" || (echo "Failed to create directory" && exit /b 1)
+      echo "Directory created successfully."
+      echo "Running Newman tests..."
+      newman run Test_fire.postman_collection.json --environment Brocaly.postman_environment.json -r htmlextra --reporter-htmlextra-export "$(Build.ArtifactStagingDirectory)\reports\report.html" || (echo "Newman tests failed" && exit /b 1)
+      echo "Newman tests completed successfully."
     displayName: 'Run API Test and Create Reports Directory'
+
 
 
   - task: PublishPipelineArtifact@1
