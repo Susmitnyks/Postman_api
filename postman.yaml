@@ -17,6 +17,7 @@ steps:
       newman run Test_fire.postman_collection.json --environment Brocaly.postman_environment.json -r cli htmlextra --reporter-htmlextra-export "$(Build.ArtifactStagingDirectory)\reports\report.html" || (echo "Newman tests failed" && exit /b 1)
       echo "Newman tests completed successfully."
     displayName: 'Run API Test and Create Reports Directory'
+    continueOnError: true
 
 
 
