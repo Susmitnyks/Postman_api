@@ -700,7 +700,7 @@
 							"});\r",
 							"\r",
 							"// Assert that agent_name \"Tharwat Daniels\" exists in the data array\r",
-							"pm.test(\"Verify Agent name 'Tharwat Daniels' exists\", function () {\r",
+							"pm.test(\"Verify the Agent name 'Tharwat Daniels' exists\", function () {\r",
 							"    let agentFound = jsonData.data.some(function (agent) {\r",
 							"        return agent.agent_name === \"Tharwat Daniels\";\r",
 							"    });\r",
