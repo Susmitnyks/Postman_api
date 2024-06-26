@@ -7,19 +7,16 @@ pool:
 steps:
   - script: |
       npm install -g newman newman-reporter-htmlextra
-    displayName: 'Install Newman and Html reporter'
+    displayName: 'Install Newman and Html Reporter'
 
   - script: |
       echo "Creating reports directory..."
-      mkdir "$(Build.ArtifactStagingDirectory)\reports" || (echo "Failed to create directory" && exit /b 1)
+      mkdir "$(Build.ArtifactStagingDirectory)\reports"
       echo "Directory created successfully."
       echo "Running Newman tests..."
-      newman run Test_fire.postman_collection.json --environment Brocaly.postman_environment.json -r cli htmlextra --reporter-htmlextra-export "$(Build.ArtifactStagingDirectory)\reports\report.html" || (echo "Newman tests failed" && exit /b 1)
+      newman run Test_fire.postman_collection.json --environment Brocaly.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export "$(Build.ArtifactStagingDirectory)\reports\report.html"
       echo "Newman tests completed successfully."
-    displayName: 'Run API Test and Create Reports Directory'
-    continueOnError: true
-
-
+    displayName: 'Run API Tests and Create Report'
 
   - task: PublishPipelineArtifact@1
     displayName: 'Publish HTML Report'
@@ -41,22 +38,26 @@ steps:
         $todayDate = Get-Date -Format "dd-MM-yyyy"
         
         # Set the email subject
-        $subject = "Daily Report : Brocaly [Azure platform] Production API Automation report for $todayDate"
+        $subject = "Daily Report: Brocaly [Azure platform] Production API Automation report for $todayDate"
         
         # SMTP credentials
         $username = "susmit.s.surwade@gmail.com"
         $password = "qzod ltfm nmav tqvw"
-        $organization = "susmitsurwade"
-        $project = "SusmitDemo"
         
         # Email body
-        $emailBody = "Please find the attached api's health report."
+        $emailBody = "Please find the attached API's health report."
         
         # Path to the HTML report
         $attachmentPath = "$(Build.ArtifactStagingDirectory)\reports\report.html"
         
-        # Send email with attached HTML report using TLS/SSL
-        $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
-        $credential = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
-        Send-MailMessage -SmtpServer $smtpServer -Port $smtpPort -From $from -To $to -Subject $subject -Body $emailBody -Attachments $attachmentPath -Credential $credential -UseSsl
-    displayName: 'Send Email with attached HTML report'
+        # Check if the report file exists before sending the email
+        if (Test-Path $attachmentPath) {
+            # Send email with attached HTML report using TLS/SSL
+            $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+            $credential = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
+            Send-MailMessage -SmtpServer $smtpServer -Port $smtpPort -From $from -To $to -Subject $subject -Body $emailBody -Attachments $attachmentPath -Credential $credential -UseSsl
+        } else {
+            Write-Error "Report file not found: $attachmentPath"
+            exit 1
+        }
+    displayName: 'Send Email with attached HTML Report'
