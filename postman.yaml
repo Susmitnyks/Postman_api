@@ -32,8 +32,8 @@ steps:
           $smtpServer = "email-smtp.eu-west-1.amazonaws.com"
           $smtpPort = 587
           $from = "no-reply@mail.englishscore.com"
-          $to = @("susmit.surwade@blenheimchalcot.com","satyendra.kumar@blenheimchalcot.com","ami.jambusaria@blenheimchalcot.com","rinkesh.das@blenheimchalcot.com")
-          # $to = @("susmit.surwade@blenheimchalcot.com")
+          #$to = @("susmit.surwade@blenheimchalcot.com","satyendra.kumar@blenheimchalcot.com","ami.jambusaria@blenheimchalcot.com","rinkesh.das@blenheimchalcot.com")
+          $to = @("susmit.surwade@blenheimchalcot.com")
           # Get today's date
           $todayDate = Get-Date -Format "dd-MM-yyyy"
           
