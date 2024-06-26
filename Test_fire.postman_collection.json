@@ -6,25 +6,16 @@
 	},
 	"item": [
 		{
-			"name": "Token API - Oakbrook",
+			"name": "GENERATE TOKEN NEW",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"pm.test(\"Extract access token\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.environment.set(\"access_token\", jsonData.access_token);\r",
+							"    var responseText = pm.response.text();\r",
+							"    pm.environment.set(\"access_token\", responseText);\r",
 							"});\r",
-							"\r",
-							"pm.test(\"Extract refresh token\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.environment.set(\"refresh_token\", jsonData.refresh_token);\r",
-							"});\r",
-							"pm.test(\"Verify Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -33,77 +24,22 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "accept",
-						"value": "*/*"
-					},
-					{
-						"key": "accept-language",
-						"value": "en-US,en;q=0.9"
-					},
-					{
-						"key": "content-type",
-						"value": "application/x-www-form-urlencoded;charset=utf-8"
-					},
-					{
-						"key": "origin",
-						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net"
-					},
-					{
-						"key": "priority",
-						"value": "u=1, i"
-					},
-					{
-						"key": "referer",
-						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/"
-					},
-					{
-						"key": "sec-ch-ua",
-						"value": "\"Google Chrome\";v=\"125\", \"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\""
-					},
-					{
-						"key": "sec-ch-ua-mobile",
-						"value": "?0"
-					},
-					{
-						"key": "sec-ch-ua-platform",
-						"value": "\"Windows\""
-					},
-					{
-						"key": "sec-fetch-dest",
-						"value": "empty"
-					},
-					{
-						"key": "sec-fetch-mode",
-						"value": "cors"
-					},
-					{
-						"key": "sec-fetch-site",
-						"value": "cross-site"
-					},
-					{
-						"key": "user-agent",
-						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "client_id=16f9d357-3ffe-40dc-9039-29f9b14d810e&scope=api%3A%2F%2F5c1bd365-0696-410b-ac58-a11b8ca3c72b%2F.default%20openid%20profile%20offline_access&grant_type=refresh_token&client_info=1&x-client-SKU=msal.js.browser&x-client-VER=3.10.0&x-ms-lib-capability=retry-after, h429&x-client-current-telemetry=5|61,0,,,|,&x-client-last-telemetry=5|0|||0,0&client-request-id=018fc45e-3ddb-70dd-b714-e2a7962db9a9&refresh_token={{refresh_token}}&X-AnchorMailbox=Oid%3Abff03e80-44f4-4038-b3b2-b44711acb7cc%40a08d8e40-4cc5-47a0-81d3-c43ba1ffcb5c"
+					"raw": "{\r\n\r\n\"email\":\"service_oakbrook@brocaly.com\",\r\n\"secret_key\":\"nC@RA5$me+^hr5PG6u{+BbJ3QSE.d7xsqmXnPL1ob,Ud'IoY^~\"\r\n\r\n}\r\n"
 				},
 				"url": {
-					"raw": "https://login.microsoftonline.com/a08d8e40-4cc5-47a0-81d3-c43ba1ffcb5c/oauth2/v2.0/token",
+					"raw": "https://PRD-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/generate_token",
 					"protocol": "https",
 					"host": [
-						"login",
-						"microsoftonline",
-						"com"
+						"PRD-brocaly-d0d5h0a3deaedvbq",
+						"z02",
+						"azurefd",
+						"net"
 					],
 					"path": [
-						"a08d8e40-4cc5-47a0-81d3-c43ba1ffcb5c",
-						"oauth2",
-						"v2.0",
-						"token"
+						"generate_token"
 					]
 				}
 			},
@@ -119,17 +55,7 @@
 							"pm.test(\"Verify Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"\r",
-							"pm.test(\"Verify Email Found\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"susmit.surwade_oakbrook@brocaly.com\");\r",
-							"\r",
-							"pm.test(\"Verify org assigned 'Oakbrook'\", function () {\r",
-							"     pm.expect(pm.response.text()).to.include(\"Oakbrook\");\r",
-							"});\r",
-							"});\r",
-							"pm.test(\"Verify Role found 'Org Admin'\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"Org Admin\");\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -640,7 +566,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/api/org/2/imported-conversations?tab=2&filters\\[conversationType\\]\\[0\\]=Voice&page=1&sort=-startDate",
+					"raw": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/api/org/2/imported-conversations?tab=2&filters[conversationType][0]=Voice&page=1&sort=-startDate",
 					"protocol": "https",
 					"host": [
 						"prd-brocaly-d0d5h0a3deaedvbq",
@@ -660,7 +586,7 @@
 							"value": "2"
 						},
 						{
-							"key": "filters\\[conversationType\\]\\[0\\]",
+							"key": "filters[conversationType][0]",
 							"value": "Voice"
 						},
 						{
@@ -814,6 +740,147 @@
 						{
 							"key": "filters[conversationType][0]",
 							"value": "Voice"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "-startDate"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Conversation Listing(Voice): Agent name filter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify agent name in first data object\", function () {\r",
+							"    // Parse the JSON response body\r",
+							"    var jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Check if the agent name in the first data object is \"Benecia Solan\"\r",
+							"    pm.expect(jsonData.data[0].agent_name).to.eql(\"Benecia Solan\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "cookie",
+						"value": "ai_user=nQkbmhkje4kZ/b0gnIHaaj|2024-06-11T06:27:44.931Z; ASLBSA=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; ASLBSACORS=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; organization=2; msal.client.idToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTkzMTEzMjMsIm5iZiI6MTcxOTMxMTMyMywiZXhwIjoxNzE5MzE1MjIzLCJhaW8iOiJBV1FBbS84WEFBQUFpYTJmSnVyeWRYWG9yZ091Yi9qUFVveGRqbDNpSkJpTnpmSXQ1T1Rra0pMNmdnYWJ2eWNuQ3UwQWljUHFxSForR282RGxOK3VJRjdxR0REOGZwT3FlUmZuTXd3U2tiQmU1ZmFIU0hVL1JWbWdYaVovZlVIdWFKMEFHK0RPcHNrKyIsIm5hbWUiOiJTdXNtaXQgT2FrYnJvb2siLCJub25jZSI6IjAxOTA0ZTA0LTgxMTMtNzBkYS1iZTc3LTA4MDhhZTUzMDAxYyIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwicmgiOiIwLkFhNEFRSTZOb01WTW9FZUIwOFE3b2ZfTFhGZlQtUmItUDl4QWtEa3AtYkZOZ1E2ckFENC4iLCJzdWIiOiItMTlrYVQ5Z29DWHRGN1BGN2hlaFJtczFiRTVaOTlNNzJXZzF4S0s5a1VjIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidXRpIjoiNEVFU3FpLU9oVVNEMmJNQVBqYVBBQSIsInZlciI6IjIuMCJ9.CYSw-9WCQxN1RJGrOuV6vy2YZveL4jkYPkBIfyon-DqHCQJtdTAZm_N0JO2AUDDL5suEbn-K-kYeYOqdTi186fvSNOH_Go6z7egXoJHM6FAxEGu7dxcHmVf2fi2K81iGs06p5irfVkmB22hT_Lz0M08DNafH9QoGaN9ozZXLrT3m08DCzFfr4QMNihl4QECuwxpQ9FN_efGEy936ZPgmM7tSsG2uL1K1OHWSXbzkquAD-0rpwIZMS8czLeD15VPP3sBS8MfmyBjTdgrvUDAuvAHQAmcl-T6vVVTFo8Z1yw8x7JMSkhLepN8yHLwWrq99EyZn61ht5y3yBEzaU4iMag; msal.client.accessToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiJhcGk6Ly81YzFiZDM2NS0wNjk2LTQxMGItYWM1OC1hMTFiOGNhM2M3MmIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMvIiwiaWF0IjoxNzE5MzExMzIzLCJuYmYiOjE3MTkzMTEzMjMsImV4cCI6MTcxOTMxNTU5MSwiYWNyIjoiMSIsImFpbyI6IkFWUUFxLzhYQUFBQUwrdGpmSktBdWYyVTRETW9UMWRHUmNheEhtYkxzNGtkU0ZCRHVkc1lrZ2tYUVdlbElaOXZYRWI5eUI3RmtucjRjOFJnaFNrcGpWOXZob2lXQzNiZWQ4Q1JCMmVvU1dHY3BRMSs2amI2K3lZPSIsImFtciI6WyJwd2QiLCJtZmEiXSwiYXBwaWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJhcHBpZGFjciI6IjAiLCJncm91cHMiOlsiZGQwZWY1MjItMjMyZi00N2FlLWEwOGUtOWYyODc5MDg2YmY2IiwiN2UzYTZkMzctMTNjNy00YTZiLTk2NmQtMjBlZjc3YjBmYzU0IiwiNDA1ZDcxNDgtMDYzMS00ZGFjLWJmYjYtYzIzZmJmZjEzNTgyIiwiNDU1ZTRmNDktN2Q0Zi00ODM1LWJmNjAtYTM4YTA5MWM0MDliIiwiNDEzODhjYjAtZTVmMS00NGEyLWE0MjgtYmYxNTYzOWE5MjQzIiwiNDdhZDA5YzgtMDIyOC00NzZhLWE0N2EtZDBjOTM2NjQzOWY2IiwiYjRlNWI5ZGUtNTNiMi00ODE0LWFkOWItNGQ0MmRkMmNmMmVmIiwiZmVhY2NmZWMtOWNkNS00ODU2LWI0M2QtODFjYTQ5MThkZjhlIiwiNDZiZDNkZjMtZWY2ZS00MzRmLWIwNjEtYmMzYTA0NmVmYzA0Il0sImlwYWRkciI6IjE4Mi40OC4yNTUuMjM4IiwibmFtZSI6IlN1c21pdCBPYWticm9vayIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInJoIjoiMC5BYTRBUUk2Tm9NVk1vRWVCMDhRN29mX0xYR1hURzF5V0JndEJyRmloRzR5anh5dXJBRDQuIiwic2NwIjoiYmFja2VuZF9hcGkiLCJzdWIiOiJqWDJTTVdlaEY5anpRREJ6LWlaTzVxaUN3Rm9sSWJmRFpYSUlaZWRzaGVZIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidW5pcXVlX25hbWUiOiJzdXNtaXQuc3Vyd2FkZV9vYWticm9va0Bicm9jYWx5LmNvbSIsInVwbiI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwidXRpIjoiNEVFU3FpLU9oVVNEMmJNQVBqYVBBQSIsInZlciI6IjEuMCJ9.QSZvzeZDEcXxShO9b7c-XDKuZTAfDdb1IB1eiD0yCPr7xKGW47dOQZRSyRJnJgk-rBzFuFVZJGbVBJdmIw8SYIfUgx-nxI8EcO6rNj9wWtrIcEMAFWa1-cbWhLN340iXQSUOgZsA7LR0YKNqg053kr1WgZZfdOBNa_8UmGnfWb1V6Q6iqGxGJF75z7buINQ4YEzgb-H16E-_4k6QceeOQNvzo5hrOvvX9veJC5dN6Zd7G4e7yuG7tny21237kBF2EuQa2NGeTEsMNA71vnsRXeZJ-bU2jAWBr4PkITyXOfvdrpKk-Kp6pIjFgocFs4XQMgbLWNEU21LMPBUy7Aao2w; ai_session=p99nKpDsp6uO+YuOP4sRce|1719299441637|1719313590478"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/conversations?tab=3"
+					},
+					{
+						"key": "request-context",
+						"value": "appId=cid-v1:37e39a7a-255f-4966-b015-42130889ffc8"
+					},
+					{
+						"key": "request-id",
+						"value": "|4c64352d3ef940fba930e8e027b3af99.921d325fd3754475"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Google Chrome\";v=\"126\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "traceparent",
+						"value": "00-4c64352d3ef940fba930e8e027b3af99-921d325fd3754475-01"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "x-token-id",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTkzMTEzMjMsIm5iZiI6MTcxOTMxMTMyMywiZXhwIjoxNzE5MzE1MjIzLCJhaW8iOiJBV1FBbS84WEFBQUFpYTJmSnVyeWRYWG9yZ091Yi9qUFVveGRqbDNpSkJpTnpmSXQ1T1Rra0pMNmdnYWJ2eWNuQ3UwQWljUHFxSForR282RGxOK3VJRjdxR0REOGZwT3FlUmZuTXd3U2tiQmU1ZmFIU0hVL1JWbWdYaVovZlVIdWFKMEFHK0RPcHNrKyIsIm5hbWUiOiJTdXNtaXQgT2FrYnJvb2siLCJub25jZSI6IjAxOTA0ZTA0LTgxMTMtNzBkYS1iZTc3LTA4MDhhZTUzMDAxYyIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwicmgiOiIwLkFhNEFRSTZOb01WTW9FZUIwOFE3b2ZfTFhGZlQtUmItUDl4QWtEa3AtYkZOZ1E2ckFENC4iLCJzdWIiOiItMTlrYVQ5Z29DWHRGN1BGN2hlaFJtczFiRTVaOTlNNzJXZzF4S0s5a1VjIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidXRpIjoiNEVFU3FpLU9oVVNEMmJNQVBqYVBBQSIsInZlciI6IjIuMCJ9.CYSw-9WCQxN1RJGrOuV6vy2YZveL4jkYPkBIfyon-DqHCQJtdTAZm_N0JO2AUDDL5suEbn-K-kYeYOqdTi186fvSNOH_Go6z7egXoJHM6FAxEGu7dxcHmVf2fi2K81iGs06p5irfVkmB22hT_Lz0M08DNafH9QoGaN9ozZXLrT3m08DCzFfr4QMNihl4QECuwxpQ9FN_efGEy936ZPgmM7tSsG2uL1K1OHWSXbzkquAD-0rpwIZMS8czLeD15VPP3sBS8MfmyBjTdgrvUDAuvAHQAmcl-T6vVVTFo8Z1yw8x7JMSkhLepN8yHLwWrq99EyZn61ht5y3yBEzaU4iMag"
+					}
+				],
+				"url": {
+					"raw": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/api/org/2/imported-conversations?tab=3&filters[conversationType][0]=Voice&filters[agentName]=Benecia+Solan&page=1&sort=-startDate",
+					"protocol": "https",
+					"host": [
+						"prd-brocaly-d0d5h0a3deaedvbq",
+						"z02",
+						"azurefd",
+						"net"
+					],
+					"path": [
+						"api",
+						"org",
+						"2",
+						"imported-conversations"
+					],
+					"query": [
+						{
+							"key": "tab",
+							"value": "3"
+						},
+						{
+							"key": "filters[conversationType][0]",
+							"value": "Voice"
+						},
+						{
+							"key": "filters[agentName]",
+							"value": "Benecia+Solan"
 						},
 						{
 							"key": "page",
