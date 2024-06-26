@@ -26,38 +26,38 @@ steps:
 
   - task: PowerShell@2
     inputs:
-      targetType: 'inline'
-      script: |
-        # SMTP configuration for Gmail
-        $smtpServer = "smtp.gmail.com"
-        $smtpPort = 587
-        $from = "susmit.s.surwade@gmail.com"
-        #$to = @("lokesh.singh@blenheimchalcot.com","susmit.surwade@blenheimchalcot.com","satyendra.kumar@blenheimchalcot.com","rinkesh.das@blenheimchalcot.com","ami.jambusaria@blenheimchalcot.com")
-        $to = @("susmit.surwade@blenheimchalcot.com")
-        # Get today's date
-        $todayDate = Get-Date -Format "dd-MM-yyyy"
-        
-        # Set the email subject
-        $subject = "Daily Report: Brocaly [Azure platform] Production API Automation report for $todayDate"
-        
-        # SMTP credentials
-        $username = "susmit.s.surwade@gmail.com"
-        $password = "qzod ltfm nmav tqvw"
-        
-        # Email body
-        $emailBody = "Please find the attached API's health report."
-        
-        # Path to the HTML report
-        $attachmentPath = "$(Build.ArtifactStagingDirectory)\reports\report.html"
-        
-        # Check if the report file exists before sending the email
-        if (Test-Path $attachmentPath) {
-            # Send email with attached HTML report using TLS/SSL
-            $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
-            $credential = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
-            Send-MailMessage -SmtpServer $smtpServer -Port $smtpPort -From $from -To $to -Subject $subject -Body $emailBody -Attachments $attachmentPath -Credential $credential -UseSsl
-        } else {
-            Write-Error "Report file not found: $attachmentPath"
-            exit 1
-        }
+        targetType: 'inline'
+        script: |
+          # SMTP configuration for AWS SES
+          $smtpServer = "email-smtp.eu-west-1.amazonaws.com"
+          $smtpPort = 587
+          $from = "no-reply@mail.englishscore.com"
+          $to = @("susmit.surwade@blenheimchalcot.com")
+          
+          # Get today's date
+          $todayDate = Get-Date -Format "dd-MM-yyyy"
+          
+          # Set the email subject
+          $subject = "Daily Report: Brocaly [Azure platform] Production API Automation report for $todayDate"
+          
+          # SMTP credentials
+          $username = "AKIA5YBB6OJ66G2MXV7B"
+          $password = "BMX8OsOi7Gy4OLgEsaKvyICJQbDOYv8XVEHtE2DGcLIE"
+          
+          # Email body
+          $emailBody = "Please find the attached API's health report."
+          
+          # Path to the HTML report
+          $attachmentPath = "$(Build.ArtifactStagingDirectory)\reports\report.html"
+          
+          # Check if the report file exists before sending the email
+          if (Test-Path $attachmentPath) {
+              # Send email with attached HTML report using TLS/SSL
+              $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+              $credential = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
+              Send-MailMessage -SmtpServer $smtpServer -Port $smtpPort -From $from -To $to -Subject $subject -Body $emailBody -Attachments $attachmentPath -Credential $credential -UseSsl
+          } else {
+              Write-Error "Report file not found: $attachmentPath"
+              exit 1
+          }
     displayName: 'Send Email with attached HTML Report'
