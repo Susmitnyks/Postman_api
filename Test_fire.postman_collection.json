@@ -1074,7 +1074,7 @@
 					},
 					{
 						"key": "authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiJhcGk6Ly81YzFiZDM2NS0wNjk2LTQxMGItYWM1OC1hMTFiOGNhM2M3MmIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMvIiwiaWF0IjoxNzE5Mzk5NDY0LCJuYmYiOjE3MTkzOTk0NjQsImV4cCI6MTcxOTQwNDU5MiwiYWNyIjoiMSIsImFpbyI6IkFWUUFxLzhYQUFBQW02UVYycHV1UEp1bGM1c2tmN1pNK0FhSlVSUmVpRHJEeXZ2NEVXUjhRYndPNDlqTEpDcm9wQlRZcksvOEtMSDUyM3ErdXJoMm5VV0dJd29rVkJEeVQ0TityOGpFVi9DTm5RcnVsL2VaVjRnPSIsImFtciI6WyJwd2QiLCJtZmEiXSwiYXBwaWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJhcHBpZGFjciI6IjAiLCJncm91cHMiOlsiZGQwZWY1MjItMjMyZi00N2FlLWEwOGUtOWYyODc5MDg2YmY2IiwiN2UzYTZkMzctMTNjNy00YTZiLTk2NmQtMjBlZjc3YjBmYzU0IiwiNDA1ZDcxNDgtMDYzMS00ZGFjLWJmYjYtYzIzZmJmZjEzNTgyIiwiNDU1ZTRmNDktN2Q0Zi00ODM1LWJmNjAtYTM4YTA5MWM0MDliIiwiNDEzODhjYjAtZTVmMS00NGEyLWE0MjgtYmYxNTYzOWE5MjQzIiwiNDdhZDA5YzgtMDIyOC00NzZhLWE0N2EtZDBjOTM2NjQzOWY2IiwiYjRlNWI5ZGUtNTNiMi00ODE0LWFkOWItNGQ0MmRkMmNmMmVmIiwiZmVhY2NmZWMtOWNkNS00ODU2LWI0M2QtODFjYTQ5MThkZjhlIiwiNDZiZDNkZjMtZWY2ZS00MzRmLWIwNjEtYmMzYTA0NmVmYzA0Il0sImlwYWRkciI6IjE4Mi40OC4yNTUuMjM4IiwibmFtZSI6IlN1c21pdCBPYWticm9vayIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInJoIjoiMC5BYTRBUUk2Tm9NVk1vRWVCMDhRN29mX0xYR1hURzF5V0JndEJyRmloRzR5anh5dXJBRDQuIiwic2NwIjoiYmFja2VuZF9hcGkiLCJzdWIiOiJqWDJTTVdlaEY5anpRREJ6LWlaTzVxaUN3Rm9sSWJmRFpYSUlaZWRzaGVZIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidW5pcXVlX25hbWUiOiJzdXNtaXQuc3Vyd2FkZV9vYWticm9va0Bicm9jYWx5LmNvbSIsInVwbiI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwidXRpIjoicm9GX21ZVVNTVUNIQVRYRjFfcVFBQSIsInZlciI6IjEuMCJ9.rlHm7IdDqgSkyDAx9UWan9H6BfHt98XpIKx5w8mxiSGdeF4jz1yK_4szQe2DI5-i332pWaQQjc_O2Og4h3VbZXIl6dbhAI1V774SvVJzAQK9jRQhTJE0osgFPbnc-51ft5ZmGh_9WJ-nR3NxBPSWDdR9CFySpDRXzWHnWPXtITgG_Da0_zuWCLJWWzzjXf_mZ3Sl_KX4QG9AE5no9e47pHEQdXX-E6Gj5kywWcePqKHuYpAFOVJXeQBqtnyPAecS67BMcNXpJf1uyb0DgkpNCNvTILu8Xtc1h_2ArsdtcgNuz1CpSzhiWhZDge3SW-b84DudRVcLDvy7mADNb-R6_g"
+						"value": "Bearer {{access_token}}"
 					},
 					{
 						"key": "cache-control",
@@ -1164,6 +1164,144 @@
 						{
 							"key": "filters[conversationID]",
 							"value": "44735"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "-startDate"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Conversation Listing(Voice): Agreement no filter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check agreement no = 1300621976 in response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].agreement_number).to.eql(\"1300621976\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "cookie",
+						"value": "ai_user=nQkbmhkje4kZ/b0gnIHaaj|2024-06-11T06:27:44.931Z; ASLBSA=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; ASLBSACORS=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; organization=2; msal.client.idToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTk0MDQxNDYsIm5iZiI6MTcxOTQwNDE0NiwiZXhwIjoxNzE5NDA4MDQ2LCJhaW8iOiJBV1FBbS84WEFBQUF3VHUrTTRONnhQamU2T1R4ZXNiTFRmT3U5anhwRkcxYzRBdkhEVUhtd0JtenFDSlZDTEI3ZTVhZGVDN3R2dHp0dVdESzhIQlY4U1ZYK3duc0VVK0JsNk9rbkxkVTRWMnY1ZlBNQ0ptUjBqbjZGME5aVzV3V2ptdG94ejlBbHdWTSIsIm5hbWUiOiJTdXNtaXQgT2FrYnJvb2siLCJub25jZSI6IjAxOTA1M2I1LWI5ZDMtN2I3ZC1hYTYwLTk3MTlmNDU3NDRlZCIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwicmgiOiIwLkFhNEFRSTZOb01WTW9FZUIwOFE3b2ZfTFhGZlQtUmItUDl4QWtEa3AtYkZOZ1E2ckFENC4iLCJzdWIiOiItMTlrYVQ5Z29DWHRGN1BGN2hlaFJtczFiRTVaOTlNNzJXZzF4S0s5a1VjIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidXRpIjoiaFFNZEtEV3I5VW0ycC1RMmprYTdBQSIsInZlciI6IjIuMCJ9.jjSIhpCc2hsVVk46lKo48NxAYTaJ_z7TilrwIprTinZUJfcUgTVxmccq4z5ygYLL_igkQFerVCxpnX2dnrt0k9QRrPPYvkRQcPRp4zrpYuIiWw_tI0FkiPMOqBiaKZRyZtAQgOCmbm9xww2mkVb-u3WZGEmZKupuvoFBNm6or3Ki1e0TtoKowscSqh30vNHqXHWXdg8aIOfwkqusFx2uSfxEb-Bp79nCme-RUFul8f9ocrw0W-W3f8hWgOWscv-Mev08Eqx49BKZIVIRyCshQ4Z0oUT6EVh1BY4NKj6MzNiCM9sslvI2QrLbQE_B_5Kvue32s6R7eAgxnQTlkSAXMw; msal.client.accessToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiJhcGk6Ly81YzFiZDM2NS0wNjk2LTQxMGItYWM1OC1hMTFiOGNhM2M3MmIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMvIiwiaWF0IjoxNzE5NDA0MTQ2LCJuYmYiOjE3MTk0MDQxNDYsImV4cCI6MTcxOTQwODM2MiwiYWNyIjoiMSIsImFpbyI6IkFWUUFxLzhYQUFBQTlmclByZEFucFJ1OEVVcmZkN29ITVMvdkNiNXh6WTkrK3JnaHZoYXdzajUvdW0vTTlFRFBXWFk5WGpSYVZUWlBKT0JQZUFxY0FTSFh3KzhNcVlZYVVEdHRLbmxQbS9JK1JHV01ZcGR5clRBPSIsImFtciI6WyJwd2QiLCJtZmEiXSwiYXBwaWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJhcHBpZGFjciI6IjAiLCJncm91cHMiOlsiZGQwZWY1MjItMjMyZi00N2FlLWEwOGUtOWYyODc5MDg2YmY2IiwiN2UzYTZkMzctMTNjNy00YTZiLTk2NmQtMjBlZjc3YjBmYzU0IiwiNDA1ZDcxNDgtMDYzMS00ZGFjLWJmYjYtYzIzZmJmZjEzNTgyIiwiNDU1ZTRmNDktN2Q0Zi00ODM1LWJmNjAtYTM4YTA5MWM0MDliIiwiNDEzODhjYjAtZTVmMS00NGEyLWE0MjgtYmYxNTYzOWE5MjQzIiwiNDdhZDA5YzgtMDIyOC00NzZhLWE0N2EtZDBjOTM2NjQzOWY2IiwiYjRlNWI5ZGUtNTNiMi00ODE0LWFkOWItNGQ0MmRkMmNmMmVmIiwiZmVhY2NmZWMtOWNkNS00ODU2LWI0M2QtODFjYTQ5MThkZjhlIiwiNDZiZDNkZjMtZWY2ZS00MzRmLWIwNjEtYmMzYTA0NmVmYzA0Il0sImlwYWRkciI6IjE4Mi40OC4yNTUuMjM4IiwibmFtZSI6IlN1c21pdCBPYWticm9vayIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInJoIjoiMC5BYTRBUUk2Tm9NVk1vRWVCMDhRN29mX0xYR1hURzF5V0JndEJyRmloRzR5anh5dXJBRDQuIiwic2NwIjoiYmFja2VuZF9hcGkiLCJzdWIiOiJqWDJTTVdlaEY5anpRREJ6LWlaTzVxaUN3Rm9sSWJmRFpYSUlaZWRzaGVZIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidW5pcXVlX25hbWUiOiJzdXNtaXQuc3Vyd2FkZV9vYWticm9va0Bicm9jYWx5LmNvbSIsInVwbiI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwidXRpIjoiaFFNZEtEV3I5VW0ycC1RMmprYTdBQSIsInZlciI6IjEuMCJ9.WAsDlDtmodvgT9LtAyeCLQCEbXgxqNkfZLEsLkI6ZXQruKoPZKjSFLpo6akDkMckIvfQfaxvQTExiG8candnZuj7x8QtyxdqSad860EAKI8RczpXNn7ppBR6_AekXGyn18QXu-OpmTvC3v7iiWR7cm89QHY4FcxOZTEHj7BJUVvMBNqiEJjDEM1jtGimw2VQ2vXYS54CT_kLAi4xhIx0AtZ0AfweXHyMIhsUE97nXoaTKebjoMHA17qbj87CWPGtmgy3QM96wjmb-wMOPYNIiSfD5O7iSKbRHf5UEme29SRfZNSTvZ07AiZLgh9HAcfYqeC3SihldPGvONdwFw-pcQ; ai_session=97EtyEoBq+zZKZAp5tJq6Y|1719398714051|1719404513427"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/conversations?tab=3"
+					},
+					{
+						"key": "request-context",
+						"value": "appId=cid-v1:37e39a7a-255f-4966-b015-42130889ffc8"
+					},
+					{
+						"key": "request-id",
+						"value": "|5f9aad0ba141476595afd1e588bb6188.ad63db9e93dd48eb"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Google Chrome\";v=\"126\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "traceparent",
+						"value": "00-5f9aad0ba141476595afd1e588bb6188-ad63db9e93dd48eb-01"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "x-token-id",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTk0MDQxNDYsIm5iZiI6MTcxOTQwNDE0NiwiZXhwIjoxNzE5NDA4MDQ2LCJhaW8iOiJBV1FBbS84WEFBQUF3VHUrTTRONnhQamU2T1R4ZXNiTFRmT3U5anhwRkcxYzRBdkhEVUhtd0JtenFDSlZDTEI3ZTVhZGVDN3R2dHp0dVdESzhIQlY4U1ZYK3duc0VVK0JsNk9rbkxkVTRWMnY1ZlBNQ0ptUjBqbjZGME5aVzV3V2ptdG94ejlBbHdWTSIsIm5hbWUiOiJTdXNtaXQgT2FrYnJvb2siLCJub25jZSI6IjAxOTA1M2I1LWI5ZDMtN2I3ZC1hYTYwLTk3MTlmNDU3NDRlZCIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwicmgiOiIwLkFhNEFRSTZOb01WTW9FZUIwOFE3b2ZfTFhGZlQtUmItUDl4QWtEa3AtYkZOZ1E2ckFENC4iLCJzdWIiOiItMTlrYVQ5Z29DWHRGN1BGN2hlaFJtczFiRTVaOTlNNzJXZzF4S0s5a1VjIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidXRpIjoiaFFNZEtEV3I5VW0ycC1RMmprYTdBQSIsInZlciI6IjIuMCJ9.jjSIhpCc2hsVVk46lKo48NxAYTaJ_z7TilrwIprTinZUJfcUgTVxmccq4z5ygYLL_igkQFerVCxpnX2dnrt0k9QRrPPYvkRQcPRp4zrpYuIiWw_tI0FkiPMOqBiaKZRyZtAQgOCmbm9xww2mkVb-u3WZGEmZKupuvoFBNm6or3Ki1e0TtoKowscSqh30vNHqXHWXdg8aIOfwkqusFx2uSfxEb-Bp79nCme-RUFul8f9ocrw0W-W3f8hWgOWscv-Mev08Eqx49BKZIVIRyCshQ4Z0oUT6EVh1BY4NKj6MzNiCM9sslvI2QrLbQE_B_5Kvue32s6R7eAgxnQTlkSAXMw"
+					}
+				],
+				"url": {
+					"raw": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/api/org/2/imported-conversations?tab=3&filters[conversationType][0]=Voice&filters[agreementNumber]=1300621976&page=1&sort=-startDate",
+					"protocol": "https",
+					"host": [
+						"prd-brocaly-d0d5h0a3deaedvbq",
+						"z02",
+						"azurefd",
+						"net"
+					],
+					"path": [
+						"api",
+						"org",
+						"2",
+						"imported-conversations"
+					],
+					"query": [
+						{
+							"key": "tab",
+							"value": "3"
+						},
+						{
+							"key": "filters[conversationType][0]",
+							"value": "Voice"
+						},
+						{
+							"key": "filters[agreementNumber]",
+							"value": "1300621976"
 						},
 						{
 							"key": "page",
