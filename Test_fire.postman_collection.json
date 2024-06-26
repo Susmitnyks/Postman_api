@@ -894,6 +894,152 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Conversation Listing(Voice): Overall Quality ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Total file is 39 for 40% to 60%\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.meta.total).to.eql(39);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiJhcGk6Ly81YzFiZDM2NS0wNjk2LTQxMGItYWM1OC1hMTFiOGNhM2M3MmIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMvIiwiaWF0IjoxNzE5MzgxMDYwLCJuYmYiOjE3MTkzODEwNjAsImV4cCI6MTcxOTM4NTE2NCwiYWNyIjoiMSIsImFpbyI6IkFWUUFxLzhYQUFBQUEraGNpbUdTSzRGUWV1ZmpCWkhBV1NqV1dIZUJjcXhLZUlQUzhieENEcHdiSE9INGRNZWhRU3E3RkV1ekJFUU4xR0QwdnNzUzZWQWdhcFVQSWxldHYwSG9RdzZGclZuQ2ZnWmRETldvOG5nPSIsImFtciI6WyJwd2QiLCJtZmEiXSwiYXBwaWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJhcHBpZGFjciI6IjAiLCJncm91cHMiOlsiZGQwZWY1MjItMjMyZi00N2FlLWEwOGUtOWYyODc5MDg2YmY2IiwiN2UzYTZkMzctMTNjNy00YTZiLTk2NmQtMjBlZjc3YjBmYzU0IiwiNDA1ZDcxNDgtMDYzMS00ZGFjLWJmYjYtYzIzZmJmZjEzNTgyIiwiNDU1ZTRmNDktN2Q0Zi00ODM1LWJmNjAtYTM4YTA5MWM0MDliIiwiNDEzODhjYjAtZTVmMS00NGEyLWE0MjgtYmYxNTYzOWE5MjQzIiwiNDdhZDA5YzgtMDIyOC00NzZhLWE0N2EtZDBjOTM2NjQzOWY2IiwiYjRlNWI5ZGUtNTNiMi00ODE0LWFkOWItNGQ0MmRkMmNmMmVmIiwiZmVhY2NmZWMtOWNkNS00ODU2LWI0M2QtODFjYTQ5MThkZjhlIiwiNDZiZDNkZjMtZWY2ZS00MzRmLWIwNjEtYmMzYTA0NmVmYzA0Il0sImlwYWRkciI6IjE4Mi40OC4yNTUuMjM4IiwibmFtZSI6IlN1c21pdCBPYWticm9vayIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInJoIjoiMC5BYTRBUUk2Tm9NVk1vRWVCMDhRN29mX0xYR1hURzF5V0JndEJyRmloRzR5anh5dXJBRDQuIiwic2NwIjoiYmFja2VuZF9hcGkiLCJzdWIiOiJqWDJTTVdlaEY5anpRREJ6LWlaTzVxaUN3Rm9sSWJmRFpYSUlaZWRzaGVZIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidW5pcXVlX25hbWUiOiJzdXNtaXQuc3Vyd2FkZV9vYWticm9va0Bicm9jYWx5LmNvbSIsInVwbiI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwidXRpIjoiWmloYVBlSVowRVN2NVhtUTcwdXNBQSIsInZlciI6IjEuMCJ9.Yi9yzQeisC-kNyqA8Fw4vteAWI5YS_BmBT7f1atJD9be22tSKYwsn47wg2dlbehKvP_XyEhqcKPWvyoBvq8nyiKs8CHTWuJ1Oua7v-6gi2z6AsBlB5_HRJfCHrIaXmraFhmtWJttzs_VK8ANMvo8i1xnKKNeZmx8RxPCk2vZvMSkRU50XHpQuVf5p20-lLljuOpadhIqEKPkLBDCykWQEt1swsFhN-fQ96e-FVUwuFy37DE3fCIWZwveALVybI3BlOdczJIdSROsYFDXlyqR6LVYj9JvbVExfIdO-3cdfA0YTnm1pSAFdxKaszP3GSmrLUMOc_ciH-TDDYUiQZr2gg"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "cookie",
+						"value": "ai_user=nQkbmhkje4kZ/b0gnIHaaj|2024-06-11T06:27:44.931Z; ASLBSA=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; ASLBSACORS=000378d66b4248db6cb429d17c1ad4a960bec58722f0b3f05478d489d8219e2cbd4d; organization=2; msal.client.idToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTkzODEwNjAsIm5iZiI6MTcxOTM4MTA2MCwiZXhwIjoxNzE5Mzg0OTYwLCJhaW8iOiJBV1FBbS84WEFBQUFoMitrbVVaaUxJZWRTRVU3N3lGdElpQ0tsMk5PNWNnMk85OGUyWG94eUtGNld4a0JEaW1ma3ZRZk5hS2FSd3lkMnI2MXlzL0krOVJmK3Q3dmp5S0oyYmptN3Rmek1OUUJ4YlJTMkJSWE5KR3BiT0xsWmhOMXdKSzhnb2hTOEsrVSIsIm5hbWUiOiJTdXNtaXQgT2FrYnJvb2siLCJub25jZSI6IjAxOTA0ZTA0LTgxMTMtNzBkYS1iZTc3LTA4MDhhZTUzMDAxYyIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwicmgiOiIwLkFhNEFRSTZOb01WTW9FZUIwOFE3b2ZfTFhGZlQtUmItUDl4QWtEa3AtYkZOZ1E2ckFENC4iLCJzdWIiOiItMTlrYVQ5Z29DWHRGN1BGN2hlaFJtczFiRTVaOTlNNzJXZzF4S0s5a1VjIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidXRpIjoiWmloYVBlSVowRVN2NVhtUTcwdXNBQSIsInZlciI6IjIuMCJ9.rmAkdgrqh44JU3xVa1blGFzL3PK-s_f-yUZ8VtroPogJH5sYU7DKC2lJKdeFDh9oV_Iq8yQ4gJ1MSKOaR6mFciQsfRuKFSMvlEGzvkVbtZsqvmXkD8sxKleuKZUyjjgU1G_K_q22tprCHjC6P32kHHevAJtZTG9wcxsZkiIXiliyx9Fy8_RPL0YN1OLYpzCAkwbbxxNIvuBGVKIunL7AhA_xyKO1_0xgUkgoHGhb5nERyRXLEp_a9hBmqeFoSn8fciCdLq24-r9OHTm9tVMxNRm5mDaY_4enK1oKCcyTaL6qORpNvd5xVXxJVLrK6r7u6LFnsE4bzCkA3NOIkPgWUA; msal.client.accessToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiJhcGk6Ly81YzFiZDM2NS0wNjk2LTQxMGItYWM1OC1hMTFiOGNhM2M3MmIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hMDhkOGU0MC00Y2M1LTQ3YTAtODFkMy1jNDNiYTFmZmNiNWMvIiwiaWF0IjoxNzE5MzgxMDYwLCJuYmYiOjE3MTkzODEwNjAsImV4cCI6MTcxOTM4NTE2NCwiYWNyIjoiMSIsImFpbyI6IkFWUUFxLzhYQUFBQUEraGNpbUdTSzRGUWV1ZmpCWkhBV1NqV1dIZUJjcXhLZUlQUzhieENEcHdiSE9INGRNZWhRU3E3RkV1ekJFUU4xR0QwdnNzUzZWQWdhcFVQSWxldHYwSG9RdzZGclZuQ2ZnWmRETldvOG5nPSIsImFtciI6WyJwd2QiLCJtZmEiXSwiYXBwaWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJhcHBpZGFjciI6IjAiLCJncm91cHMiOlsiZGQwZWY1MjItMjMyZi00N2FlLWEwOGUtOWYyODc5MDg2YmY2IiwiN2UzYTZkMzctMTNjNy00YTZiLTk2NmQtMjBlZjc3YjBmYzU0IiwiNDA1ZDcxNDgtMDYzMS00ZGFjLWJmYjYtYzIzZmJmZjEzNTgyIiwiNDU1ZTRmNDktN2Q0Zi00ODM1LWJmNjAtYTM4YTA5MWM0MDliIiwiNDEzODhjYjAtZTVmMS00NGEyLWE0MjgtYmYxNTYzOWE5MjQzIiwiNDdhZDA5YzgtMDIyOC00NzZhLWE0N2EtZDBjOTM2NjQzOWY2IiwiYjRlNWI5ZGUtNTNiMi00ODE0LWFkOWItNGQ0MmRkMmNmMmVmIiwiZmVhY2NmZWMtOWNkNS00ODU2LWI0M2QtODFjYTQ5MThkZjhlIiwiNDZiZDNkZjMtZWY2ZS00MzRmLWIwNjEtYmMzYTA0NmVmYzA0Il0sImlwYWRkciI6IjE4Mi40OC4yNTUuMjM4IiwibmFtZSI6IlN1c21pdCBPYWticm9vayIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInJoIjoiMC5BYTRBUUk2Tm9NVk1vRWVCMDhRN29mX0xYR1hURzF5V0JndEJyRmloRzR5anh5dXJBRDQuIiwic2NwIjoiYmFja2VuZF9hcGkiLCJzdWIiOiJqWDJTTVdlaEY5anpRREJ6LWlaTzVxaUN3Rm9sSWJmRFpYSUlaZWRzaGVZIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidW5pcXVlX25hbWUiOiJzdXNtaXQuc3Vyd2FkZV9vYWticm9va0Bicm9jYWx5LmNvbSIsInVwbiI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwidXRpIjoiWmloYVBlSVowRVN2NVhtUTcwdXNBQSIsInZlciI6IjEuMCJ9.Yi9yzQeisC-kNyqA8Fw4vteAWI5YS_BmBT7f1atJD9be22tSKYwsn47wg2dlbehKvP_XyEhqcKPWvyoBvq8nyiKs8CHTWuJ1Oua7v-6gi2z6AsBlB5_HRJfCHrIaXmraFhmtWJttzs_VK8ANMvo8i1xnKKNeZmx8RxPCk2vZvMSkRU50XHpQuVf5p20-lLljuOpadhIqEKPkLBDCykWQEt1swsFhN-fQ96e-FVUwuFy37DE3fCIWZwveALVybI3BlOdczJIdSROsYFDXlyqR6LVYj9JvbVExfIdO-3cdfA0YTnm1pSAFdxKaszP3GSmrLUMOc_ciH-TDDYUiQZr2gg; ai_session=xWjGKNmVcBfP/MGF+cY2/W|1719380878816|1719381562338"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/conversations"
+					},
+					{
+						"key": "request-context",
+						"value": "appId=cid-v1:37e39a7a-255f-4966-b015-42130889ffc8"
+					},
+					{
+						"key": "request-id",
+						"value": "|3cd7db501e44496d898bb46f19bc2081.a9dc8c58dca4422a"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Google Chrome\";v=\"126\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "traceparent",
+						"value": "00-3cd7db501e44496d898bb46f19bc2081-a9dc8c58dca4422a-01"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "x-token-id",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1HTHFqOThWTkxvWGFGZnBKQ0JwZ0I0SmFLcyJ9.eyJhdWQiOiIxNmY5ZDM1Ny0zZmZlLTQwZGMtOTAzOS0yOWY5YjE0ZDgxMGUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjL3YyLjAiLCJpYXQiOjE3MTkzODEwNjAsIm5iZiI6MTcxOTM4MTA2MCwiZXhwIjoxNzE5Mzg0OTYwLCJhaW8iOiJBV1FBbS84WEFBQUFoMitrbVVaaUxJZWRTRVU3N3lGdElpQ0tsMk5PNWNnMk85OGUyWG94eUtGNld4a0JEaW1ma3ZRZk5hS2FSd3lkMnI2MXlzL0krOVJmK3Q3dmp5S0oyYmptN3Rmek1OUUJ4YlJTMkJSWE5KR3BiT0xsWmhOMXdKSzhnb2hTOEsrVSIsIm5hbWUiOiJTdXNtaXQgT2FrYnJvb2siLCJub25jZSI6IjAxOTA0ZTA0LTgxMTMtNzBkYS1iZTc3LTA4MDhhZTUzMDAxYyIsIm9pZCI6ImJmZjAzZTgwLTQ0ZjQtNDAzOC1iM2IyLWI0NDcxMWFjYjdjYyIsInByZWZlcnJlZF91c2VybmFtZSI6InN1c21pdC5zdXJ3YWRlX29ha2Jyb29rQGJyb2NhbHkuY29tIiwicmgiOiIwLkFhNEFRSTZOb01WTW9FZUIwOFE3b2ZfTFhGZlQtUmItUDl4QWtEa3AtYkZOZ1E2ckFENC4iLCJzdWIiOiItMTlrYVQ5Z29DWHRGN1BGN2hlaFJtczFiRTVaOTlNNzJXZzF4S0s5a1VjIiwidGlkIjoiYTA4ZDhlNDAtNGNjNS00N2EwLTgxZDMtYzQzYmExZmZjYjVjIiwidXRpIjoiWmloYVBlSVowRVN2NVhtUTcwdXNBQSIsInZlciI6IjIuMCJ9.rmAkdgrqh44JU3xVa1blGFzL3PK-s_f-yUZ8VtroPogJH5sYU7DKC2lJKdeFDh9oV_Iq8yQ4gJ1MSKOaR6mFciQsfRuKFSMvlEGzvkVbtZsqvmXkD8sxKleuKZUyjjgU1G_K_q22tprCHjC6P32kHHevAJtZTG9wcxsZkiIXiliyx9Fy8_RPL0YN1OLYpzCAkwbbxxNIvuBGVKIunL7AhA_xyKO1_0xgUkgoHGhb5nERyRXLEp_a9hBmqeFoSn8fciCdLq24-r9OHTm9tVMxNRm5mDaY_4enK1oKCcyTaL6qORpNvd5xVXxJVLrK6r7u6LFnsE4bzCkA3NOIkPgWUA"
+					}
+				],
+				"url": {
+					"raw": "https://prd-brocaly-d0d5h0a3deaedvbq.z02.azurefd.net/api/org/2/imported-conversations?filters[startDate]=20%2F06%2F2024&filters[endDate]=20%2F06%2F2024&filters[conversationType][0]=Voice&filters[over_all_score][min]=40&filters[over_all_score][max]=60&page=1&sort=-startDate",
+					"protocol": "https",
+					"host": [
+						"prd-brocaly-d0d5h0a3deaedvbq",
+						"z02",
+						"azurefd",
+						"net"
+					],
+					"path": [
+						"api",
+						"org",
+						"2",
+						"imported-conversations"
+					],
+					"query": [
+						{
+							"key": "filters[startDate]",
+							"value": "20%2F06%2F2024"
+						},
+						{
+							"key": "filters[endDate]",
+							"value": "20%2F06%2F2024"
+						},
+						{
+							"key": "filters[conversationType][0]",
+							"value": "Voice"
+						},
+						{
+							"key": "filters[over_all_score][min]",
+							"value": "40"
+						},
+						{
+							"key": "filters[over_all_score][max]",
+							"value": "60"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "-startDate"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
